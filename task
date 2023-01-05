@@ -35,7 +35,7 @@
 - check for character correct in numeric field
 - check for correct date and time in transfer date and time
 - the 664 id amount should match the number in 669
-- if error while reading file, move it into error foleder and log it
+- if error while reading file, move it into error folder and log it
 
 ## mysql table 
 

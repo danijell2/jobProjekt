@@ -43,13 +43,49 @@ ME 43 44 alphanumerisch Mengeneinheit (konstant 'ST')
     }
     
     private int id;
-    private int articleNumber;
+    private String articleNumber;
     private String articleType;
     private int size;
     private int times;
     
     public int getId(){
         return id;
+    }
+    
+    public void setId(int id){
+        this.id = id;
+    }
+    
+    public String getArticleNumber(){
+        return articleNumber;
+    }
+    
+    public void setArticleNumber(String articleNumber){
+        this.articleNumber = articleNumber;
+    }
+    
+    public String getArticleType(){
+        return articleType;
+    }
+    
+    public void setArticleType(String articleType){
+        this.articleType = articleType;
+    }
+    
+    public int getSize(){
+        return size;
+    }
+    
+    public void setSize(int size){
+        this.size = size;
+    }
+    
+    public int getTimes(){
+        return times;
+    }
+    
+    public void setTimes(int times){
+        this.times = times;
     }
     
 }

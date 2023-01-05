@@ -15,6 +15,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -31,6 +33,7 @@ public class ImportFile {
         boolean model661Exist = false;
         boolean model662Exist = false;
         int count = 0;
+        List<model.Model664> model664List = new ArrayList();
         
         while((line = bufferedReader.readLine()) != null){
             
@@ -60,6 +63,19 @@ public class ImportFile {
                 }else{
                     
                     // continue to model 664
+                    model.Model664 model664 = read664(line);
+                    
+                    if(model664 != null){
+                        model664List.add(model664);
+                    }else if(model664List.isEmpty()){
+                        System.out.println("No model 664 type found");
+                        break;
+                    }else{
+                        
+                        // continue with 669 model
+                        model.Model669 model669 = read669(line);
+                        
+                    }
                     
                 }
                 
@@ -91,6 +107,20 @@ public class ImportFile {
         
         model.Model661 model = null;
         
+        /*
+        #
+        661120    4711   15      202305011440
+        
+        661 constraints
+        - id -- 661, starts at 1, ends at 3
+        - delivery -- id of delivery, starts at 4 - ends at 10
+        - customer -- id of customer, starts at 11 - ends at 17
+        - sendNumber -- send number, starts at 18 - ends at 25
+        - sendDate -- sending date, format YYYYMMDD, starts at 26 - ends at 33
+        - sendTime -- sending time, format HHMM, starts at 34 - ends at 37
+        - empty space, starts at 38 - ends at 128
+        */
+        
         // check if 128 characters present
         if(line.length() == 128){
             
@@ -99,8 +129,8 @@ public class ImportFile {
             String deliveryNumber = line.substring(3, 10).replace(" ", ""); // can contain space -- need to remove it to be able to convert to number
             String customerNumber = line.substring(10, 17).replace(" ", "");
             String sendNumber = line.substring(17, 25).replace(" ", "");
-            String sendDate = line.substring(25, 33).replace(" ", "");
-            String sendTime = line.substring(33, 37).replace(" ", "");
+            String sendDate = line.substring(25, 33);
+            String sendTime = line.substring(33, 37);
             String emptySpace = line.substring(37);
             
             // check if valid
@@ -121,21 +151,7 @@ public class ImportFile {
         }else{
             model = null;
         }
-        
-        /*
-        #
-        661120    4711   15      202305011440
-        
-        661 constraints
-        - id -- 661, starts at 1, ends at 3
-        - delivery -- id of delivery, starts at 4 - ends at 10
-        - customer -- id of customer, starts at 11 - ends at 17
-        - sendNumber -- send number, starts at 18 - ends at 25
-        - sendDate -- sending date, format YYYYMMDD, starts at 26 - ends at 33
-        - sendTime -- sending time, format HHMM, starts at 34 - ends at 37
-        - empty space, starts at 38 - ends at 128
-        */
-        
+
         return model;
         
     }
@@ -167,10 +183,10 @@ id   orderNumber identificationOrderNumber idItem itemType
             // convert to individual String
             String idType = line.substring(0, 3);
             String orderNumber = line.substring(3, 7).replace(" ", "");
-            String orderNumberIdentification = line.substring(7, 11).replace(" ", "");
+            String orderNumberIdentification = line.substring(7, 11);
             String itemNumber = line.substring(11, 21).replace(" ", "");
             String emptySpace1 = line.substring(21, 41);
-            String itemType = line.substring(41, 45).replace(" ", "");
+            String itemType = line.substring(41, 45);
             String emptySpace2 = line.substring(45, 128);
             
             // check if valid
@@ -192,6 +208,116 @@ id   orderNumber identificationOrderNumber idItem itemType
         }
 
         return model662;
+        
+    }
+    
+    public model.Model664 read664(String line){
+        
+        model.Model664 model = null;
+        
+        /*
+        
+        # example
+664A9183738  ZX                    MT  004ST           
+
+id   idArticle         idArticleType size  times
+664  'A9183738  ZX'    MT            00    4ST           
+
+# details
+- id 664, number, starts at 1 - ends at 3
+- idArticle 664, text with numbers, starts at 4 - ends at 35
+- idArticleType 664, text with numbers, starts at 36 - ends at 39
+- size 664, number, starts at 40- ends at 42
+- times 664, text with numbers, starts at 43 - ends at 44 -- contains ST at the end
+- empty space, starts at 45 - ends at 128
+
+# begins after 662 at least once and can be present unlimited times
+
+#
+Feld Von Bis Typ Bedeutung
+'664' 1 3 numerisch Kennzeichen des 664-Satzes
+Sachnr 4 35 alphanumerisch bestellte Artikelnummer
+Teileart 36 39 alphanumerisch Teileart der Artikelnummer
+Menge 40 42 numerisch bestellte Menge
+ME 43 44 alphanumerisch Mengeneinheit (konstant 'ST')
+(leer) 45 128 alphanumerisch konstant ' ' (Leerzeichen)
+        
+        */
+        
+        // check if 128 characters
+        if(line.length() == 128){
+            
+            // get individual strings
+            String idType = line.substring(0, 3);
+            String articleNumber = line.substring(3, 35);
+            String articleType = line.substring(35, 39);
+            String size = line.substring(39, 41).replace(" ", line);
+            String times = line.substring(41, 44);
+            String emptySpace = line.substring(44, 128);
+            
+            // check if valid
+            if(idType.equals("664") && isNumber(size) && isNumber(times.substring(0, 1)) && times.substring(1).equals("ST") && isEmptySpace(emptySpace)){
+                
+                // convert to model
+                model = new model.Model664();
+                model.setArticleNumber(articleNumber);
+                model.setArticleType(articleType);
+                model.setSize(Integer.valueOf(size));
+                model.setTimes(Integer.valueOf(times.substring(0,1)));
+                
+            }
+            
+        }
+
+        return model;
+        
+    }
+    
+    public model.Model669 read669(String line){
+        
+        model.Model669 model = null;
+        
+        /*
+        
+        
+# example                                                                               
+6690000005                                                                                                                      
+
+id   sizeOf664 emptySpace
+669  0000005
+
+# details
+- id, number, starts at 1 - ends at 3
+- sizeOf664, number, starts at 4 - ends at 10
+- emptySpace, number, starts at 11 - ends at 128
+
+#
+'669' 1 3 numerisch Kennzeichen des 669-Satzes
+Anz.664 4 10 numerisch Anzahl der 664er-Sätze in dieser Datei
+(leer) 11 128 alphanumerisch konstant ' ' (Leerzeichen) 
+
+        
+        */
+        
+        // check if 128 characters
+        if(line.length() == 128){
+            
+            String modelType = line.substring(0, 3);
+            String size = line.substring(3, 10);
+            String emptySpace = line.substring(10, 128);
+            
+            // validate data
+            if(modelType.equals(modelType) && isNumber(size) && isEmptySpace(emptySpace)){
+                
+                // convert to model
+                model = new model.Model669();
+                model.setSize(Integer.valueOf(size));
+                
+            }
+            
+        }
+ 
+        return model;
         
     }
     
