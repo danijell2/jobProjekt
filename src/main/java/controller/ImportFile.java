@@ -27,6 +27,10 @@ public class ImportFile {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(new File("./test.txt")));
         String line;
         model.Model661 model661 = null;
+        model.Model662 model662 = null;
+        boolean model661Exist = false;
+        boolean model662Exist = false;
+        int count = 0;
         
         while((line = bufferedReader.readLine()) != null){
             
@@ -37,13 +41,28 @@ public class ImportFile {
                 
                 // check for error
                 if(model661 == null){
-                    break;
+                    System.out.println("model 661 type not found");
+                    break;     
                 }
               
              // if type661 exist continue
             }else{
                 
                 // check for 662
+                if(model662 == null){
+                    model662 = read662(line);
+                    
+                    if(model662 == null){
+                        System.out.println("model 662 type not found");
+                        break;
+                    }
+                    
+                }else{
+                    
+                    // continue to model 664
+                    
+                }
+                
                 
             }
             
@@ -82,14 +101,14 @@ public class ImportFile {
             String sendNumber = line.substring(17, 25).replace(" ", "");
             String sendDate = line.substring(25, 33).replace(" ", "");
             String sendTime = line.substring(33, 37).replace(" ", "");
+            String emptySpace = line.substring(37);
             
             // check if valid
             if(idType.equals("661") && isNumber(deliveryNumber) && isNumber(customerNumber) && isNumber(sendNumber)
-                    && isDate(sendDate) && isTime(sendTime)){
+                    && isDate(sendDate) && isTime(sendTime) && isEmptySpace(emptySpace)){
                 
                 // save to model
                 model = new model.Model661();
-                model.setId(Integer.valueOf(idType));
                 model.setDeliveryNumber(Integer.valueOf(deliveryNumber));
                 model.setCustomerNumber(Integer.valueOf(customerNumber));
                 model.setSendDate(LocalDate.parse(sendDate, DateTimeFormatter.ofPattern("YYYYMMDD")));
@@ -118,6 +137,61 @@ public class ImportFile {
         */
         
         return model;
+        
+    }
+    
+    private model.Model662 read662(String line){
+        
+        model.Model662 model662= null;
+        
+        /*
+        # example
+6627641M1002301323456                    A0                                                                                     
+
+id   orderNumber identificationOrderNumber idItem itemType
+662  764         1M1002301323456                    A0                                                                                     
+
+# details
+- id -- 662, number, starts at 1 - ends at 3
+- orderNumber -- number, starts at 4 - ends at 7
+- identificationOrderNumber -- text with number, starts at 8 - ends at 11
+- idItem -- number, starts at 12 - ends at 21
+- empty space, starts at 22 - ends at 41
+- itemType -- text and number, starts at 42 - ends at 45
+- empty space, starts at 46 - ends at 128
+        */
+        
+        // check if 128 characters present
+        if(line.length() == 128){
+            
+            // convert to individual String
+            String idType = line.substring(0, 3);
+            String orderNumber = line.substring(3, 7).replace(" ", "");
+            String orderNumberIdentification = line.substring(7, 11).replace(" ", "");
+            String itemNumber = line.substring(11, 21).replace(" ", "");
+            String emptySpace1 = line.substring(21, 41);
+            String itemType = line.substring(41, 45).replace(" ", "");
+            String emptySpace2 = line.substring(45, 128);
+            
+            // check if valid
+            if(idType.equals(idType) && isNumber(orderNumber) && isNumber(itemNumber) && isEmptySpace(emptySpace1) && isEmptySpace(emptySpace2)){
+                
+                // save to model
+                model662 = new model.Model662();
+                model662.setOrderNumber(Integer.valueOf(orderNumber));
+                model662.setOrderNumberIdentification(orderNumberIdentification);
+                model662.setItemNumber(Integer.valueOf(itemNumber));
+                model662.setItemType(itemType);
+                
+            }else{
+                model662 = null;
+            }
+            
+        }else{
+            model662 = null;
+        }
+
+        return model662;
         
     }
     
@@ -166,6 +240,22 @@ public class ImportFile {
             
         }catch(Exception exception){
             state = false;
+        }
+        
+        return state;
+        
+    }
+    
+    private boolean isEmptySpace(String text){
+        
+        boolean state = true;
+        
+        for(int i = 0; i < text.length(); i++){
+            
+            if(!String.valueOf(text.charAt(i)).equals(" ")){
+                return false;
+            }
+            
         }
         
         return state;

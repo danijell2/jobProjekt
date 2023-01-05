@@ -11,6 +11,7 @@ import java.time.LocalTime;
  *
  * @author danijell258
  */
+
 public class Model661 {
     /*
     # 661 constraints
