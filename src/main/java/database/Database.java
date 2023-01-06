@@ -52,14 +52,21 @@ public class Database extends Config{
                 
             }   
             
+            conn.close();
+            
         }catch(SQLException ex){
             
-            // check for duplicate record
+            table1 = null;
+            System.out.println(ex);
+            
             if(ex.getErrorCode() == 1062){
-                duplicate = true;
+                System.out.println("Filename already in database, skipping this file");
             }
             
-            System.out.println(ex);
+        }
+        
+        if(duplicate){
+            
         }
         
         return table1;

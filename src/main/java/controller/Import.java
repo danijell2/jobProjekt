@@ -59,7 +59,15 @@ public class Import {
 
                     // insert into database
                     database.Database db = new database.Database((Properties) properties.get("connection"));
-                    db.insert
+                    table1Model = db.insertTable1(table1Model);
+                    
+                    // check if insert successfull
+                    if(table1Model != null && transitionModel.getModel664List().size() > 0){
+                        
+                        // insert into table2
+                        
+                        
+                    }
                     
                 }
                 
