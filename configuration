@@ -13,3 +13,6 @@ error_folder=./error/
 connection_username=
 connection_password=
 connection_port=
+
+## protocol folder
+protocol_folder=./protocol/log.txt

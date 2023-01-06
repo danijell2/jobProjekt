@@ -1,20 +1,21 @@
 
 
 
+## table1
 
+    create database job_projekt;
+    use database job_projekt;
+    
+    create table table1(messageId int not null auto_increment, orderNo int not null, transmission timestamp not null, supplier int not null, customer int not null, 
+    referenceNo int not null, commodity varchar(255) not null,primary key(id));
+    
+    create table table2(messageId int not null);
 
-In einer relationalen Datenbank (Postgres, MariaDB oder Oracle) sollen zwei Tabellen erstellt
-werden, die folgende Datenfelder enthalten sollen:
-Tabelle 1:
-MESSAGEID eindeutige NachrichtenID
-FILENAME Dateiname der eingelesenen Datei
-ORDERNO Bestellnummer
-TRANSMISSION Übertragungsdatum und –zeit
-SUPPLIER Lieferantennummer
-CUSTOMER Kundennummer
-REFERENCENO Kennnummer des Bauteils
-COMMODITY Teileartgruppe des Bauteils
-
+private int messageId;
+    private int position;
+    private String itemNo;
+    private int quantity;
+    private String itemType;
 
 
 Tabelle 2:

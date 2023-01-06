@@ -69,14 +69,43 @@ public class Database extends Config{
         
     }
     
-    public List<model.Table2Model> table2ModelList(List<model.Model664> list, model.Table1Model table1){
+    public List<model.Table2Model> insertTable2ModelList(List<model.Table2Model> list){
         
-        List<model.Table2Model> table2ModelList = null;
+        try(Connection conn = super.conn()){
+            
+            for(int i = 0; i < list.size(); i++){
+                
+                String sql = "insert into table2(messageId, position, itemNo, quantity, itemType) values(?, ?, ?, ?, ?)";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                model.Table2Model table2Model = list.get(i);
+                ps.setInt(1, table2Model.getMessageId());
+                ps.setInt(2, table2Model.getPosition());
+                ps.setString(3, table2Model.getItemNo());
+                ps.setInt(4, table2Model.getQuantity());
+                ps.setString(5, table2Model.getItemType());
+                ps.executeUpdate();
+                
+                conn.close();
+                
+            }
+            
+        }catch(SQLException ex){
+            System.out.println(ex);
+            list = null;
+        }
         
-        
-        
-        return table2ModelList;
+        return list;
         
     }
     
 }
+
+/*
+
+MESSAGEID eindeutige NachrichtenID
+POSITION fortlaufende Positionsnummer zur NachrichtenID (ab 1)
+ITEMNO Artikelnummer
+QUANTITY bestellte Menge
+ITEMTYPE Teileart
+
+*/

@@ -31,6 +31,7 @@ public class ImportConfiguration {
         String password = null;
         String port = null;
         String path = null;
+        String protocolFolder = null;
         
         try {
             
@@ -66,7 +67,11 @@ public class ImportConfiguration {
                     
                 }else if(line.contains("connection_path=") && (path = line.substring(line.indexOf("connection_path=")+16)).length() > 1){
                     
-                    path = port.substring(1);
+                    path = path.substring(1);
+                    
+                }else if(line.contains("protocol_folder=") && (protocolFolder = line.substring(line.indexOf("protocol_folder=")+16)).length() > 1){
+                    
+                    protocolFolder = protocolFolder.substring(1);
                     
                 }
                 
@@ -81,12 +86,14 @@ public class ImportConfiguration {
         }
         
         // validate imported data
-        if(importFolder != null && archiveFolder != null && errorFolder != null && username != null && password != null && port != null && path != null){
+        if(importFolder != null && archiveFolder != null && errorFolder != null && protocolFolder != null
+                && username != null && password != null && port != null && path != null){
             
             properties = new Properties();
             properties.put("importFolder", importFolder);
             properties.put("archiveFolder", archiveFolder);
             properties.put("errorFolder", errorFolder);
+            properties.put("protocolFolder", protocolFolder);
             
             // save connection settings
             Properties connection = new Properties();

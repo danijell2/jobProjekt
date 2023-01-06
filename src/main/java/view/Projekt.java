@@ -35,7 +35,10 @@ public class Projekt {
         if(properties != null){
             
             // import files
-            controller.Import.startImport(properties);
+            controller.Import importContr = new controller.Import();
+            importContr.startImport(properties);
+            
+            importContr = null;
             
         }else{
             

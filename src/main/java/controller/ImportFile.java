@@ -83,10 +83,14 @@ public class ImportFile {
                     model.Model664 model664 = read664(line);
                     
                     if(model664 != null){
+                        
                         model664List.add(model664);
+                        
                     }else if(model664List.isEmpty()){
+                        
                         System.out.println("No model 664 type found");
                         break;
+                        
                     }else{
                         
                         // continue with 669 model
