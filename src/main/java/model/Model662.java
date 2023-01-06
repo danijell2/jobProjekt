@@ -16,10 +16,10 @@ public class Model662 {
     }
     
     private int id;
-    private int orderNumber;
+    private int orderNo;
     private String orderNumberIdentification;
-    private int itemNumber;
-    private String itemType;
+    private int referenceNo;
+    private String commodity;
     
     public int getId(){
         return id;
@@ -29,12 +29,12 @@ public class Model662 {
         this.id = id;
     }
     
-    public int getOrderNumber(){
-        return orderNumber;
+    public int getOrderNo(){
+        return orderNo;
     }
     
-    public void setOrderNumber(int orderNumber){
-        this.orderNumber = orderNumber;
+    public void setOrderNo(int orderNo){
+        this.orderNo = orderNo;
     }
     
     public String getOrderNumberIdentification(){
@@ -45,20 +45,20 @@ public class Model662 {
         this.orderNumberIdentification = orderNumberIdentification;
     }
     
-    public int getItemNumber(){
-        return itemNumber;
+    public int getReferenceNo(){
+        return referenceNo;
     }
     
-    public void setItemNumber(int itemNumber){
-        this.itemNumber = itemNumber;
+    public void setReferenceNo(int referenceNo){
+        this.referenceNo = referenceNo;
     }
     
-    public String getItemType(){
-        return itemType;
+    public String getCommodity(){
+        return commodity;
     }
     
-    public void setItemType(String itemType){
-        this.itemType = itemType;
+    public void setCommodity(String commodity){
+        this.commodity = commodity;
     }
     
     /*

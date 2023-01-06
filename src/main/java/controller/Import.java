@@ -6,6 +6,7 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,7 +47,19 @@ public class Import {
                 // check if model exist
                 if(transitionModel != null){
                     
+                    // convert to table1 model
+                    model.Table1Model table1Model = new model.Table1Model();
+                    table1Model.setCommodity(transitionModel.getModel662().getCommodity());
+                    table1Model.setCustomer(transitionModel.getModel661().getCustomer());
+                    table1Model.setTransmission(LocalDateTime.of(transitionModel.getModel661().getSendDate(), transitionModel.getModel661().getSendTime()));
+                    table1Model.setFilname(file);
+                    table1Model.setOrderNo(transitionModel.getModel662().getOrderNo());
+                    table1Model.setReferenceNo(transitionModel.getModel662().getReferenceNo());
+                    table1Model.setSupplier(transitionModel.getModel661().getSupplier());
+
                     // insert into database
+                    database.Database db = new database.Database((Properties) properties.get("connection"));
+                    db.insert
                     
                 }
                 

@@ -1,0 +1,69 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package database;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Properties;
+
+/**
+ *
+ * @author danijell258
+ */
+public class Database extends Config{
+    
+    public Database(Properties settings){     
+        super.setSettings(settings);
+    }
+    
+    public model.Table1Model insertTable1(model.Table1Model table1){
+
+        boolean duplicate = false;
+        
+        try(Connection conn = super.conn()){
+            
+            String sql = "insert into table1(orderNo, transmission, supplier, customer, referenceNo, commodity) values(?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, table1.getOrderNo());
+            ps.setTimestamp(2, Timestamp.valueOf(table1.getTransmission()));
+            ps.setInt(3, table1.getSupplier());
+            ps.setInt(4, table1.getCustomer());
+            ps.setInt(5, table1.getReferenceNo());
+            ps.setString(6, table1.getCommodity());
+            int count = ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            int id;
+            
+            // check if insert successfull
+            if(count > 0){
+                
+                // get id
+                while(rs.next()){
+                    table1.setMessageId(rs.getInt(1));
+                }
+                
+            }   
+            
+        }catch(SQLException ex){
+            
+            // check for duplicate record
+            if(ex.getErrorCode() == 1062){
+                duplicate = true;
+            }
+            
+            System.out.println(ex);
+        }
+        
+        return table1;
+        
+    }
+    
+}

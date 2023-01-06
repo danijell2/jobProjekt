@@ -29,8 +29,8 @@ public class Model661 {
     }
     
     private int id;
-    private int deliveryNumber;
-    private int customerNumber;
+    private int supplier;
+    private int customer;
     private int sendNumber;
     private LocalDate sendDate;
     private LocalTime sendTime;
@@ -43,20 +43,20 @@ public class Model661 {
         this.id = id;
     }
     
-    public int getDeliveryNumber(){
-        return deliveryNumber;
+    public int getSupplier(){
+        return supplier;
     }
     
-    public void setDeliveryNumber(int deliveryNumber){
-        this.deliveryNumber = deliveryNumber;
+    public void setSupplier(int supplier){
+        this.supplier = supplier;
     }
     
-    public int getCustomerNumber(){
-        return customerNumber;
+    public int getCustomer(){
+        return customer;
     }
     
-    public void setCustomerNumber(int customerNumber){
-        this.customerNumber = customerNumber;
+    public void setCustomer(int customer){
+        this.customer = customer;
     }
      
     public int getSendNumber(){

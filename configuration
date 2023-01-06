@@ -10,4 +10,6 @@ archive_folder=./archive/
 error_folder=./error/
 
 ## database connection settings // username,password,port
-connection_settings=username,password,port
+connection_username=
+connection_password=
+connection_port=

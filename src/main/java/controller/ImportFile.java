@@ -109,7 +109,7 @@ public class ImportFile {
         bufferedReader.close();
         
         // check if everything alright
-        if(model661 != null && model662 != null && model664List.size() > 0 && model669 != null){
+        if(model661 != null && model662 != null && model664List.size() > 0 && model669 != null && model664List.size() == model669.getSize()){
             
             transitionModel = new model.TransitionModel();
             transitionModel.setModel661(model661);
@@ -160,8 +160,8 @@ public class ImportFile {
                 
                 // save to model
                 model = new model.Model661();
-                model.setDeliveryNumber(Integer.valueOf(deliveryNumber));
-                model.setCustomerNumber(Integer.valueOf(customerNumber));
+                model.setSupplier(Integer.valueOf(deliveryNumber));
+                model.setCustomer(Integer.valueOf(customerNumber));
                 model.setSendDate(LocalDate.parse(sendDate, DateTimeFormatter.ofPattern("YYYYMMDD")));
                 model.setSendTime(LocalTime.parse(sendTime, DateTimeFormatter.ofPattern("HHMM")));
                 
@@ -215,10 +215,10 @@ id   orderNumber identificationOrderNumber idItem itemType
                 
                 // save to model
                 model662 = new model.Model662();
-                model662.setOrderNumber(Integer.valueOf(orderNumber));
+                model662.setOrderNo(Integer.valueOf(orderNumber));
                 model662.setOrderNumberIdentification(orderNumberIdentification);
-                model662.setItemNumber(Integer.valueOf(itemNumber));
-                model662.setItemType(itemType);
+                model662.setReferenceNo(Integer.valueOf(itemNumber));
+                model662.setCommodity(itemType);
                 
             }else{
                 model662 = null;
@@ -281,9 +281,9 @@ ME 43 44 alphanumerisch Mengeneinheit (konstant 'ST')
                 
                 // convert to model
                 model = new model.Model664();
-                model.setArticleNumber(articleNumber);
-                model.setArticleType(articleType);
-                model.setSize(Integer.valueOf(size));
+                model.setItemNo(articleNumber);
+                model.setItemType(articleType);
+                model.setQuantity(Integer.valueOf(size));
                 model.setTimes(Integer.valueOf(times.substring(0,1)));
                 
             }

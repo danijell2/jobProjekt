@@ -43,9 +43,9 @@ ME 43 44 alphanumerisch Mengeneinheit (konstant 'ST')
     }
     
     private int id;
-    private String articleNumber;
-    private String articleType;
-    private int size;
+    private String itemNo;
+    private String itemType;
+    private int quantity;
     private int times;
     
     public int getId(){
@@ -56,28 +56,28 @@ ME 43 44 alphanumerisch Mengeneinheit (konstant 'ST')
         this.id = id;
     }
     
-    public String getArticleNumber(){
-        return articleNumber;
+    public String getItemNo(){
+        return itemNo;
     }
     
-    public void setArticleNumber(String articleNumber){
-        this.articleNumber = articleNumber;
+    public void setItemNo(String itemNo){
+        this.itemNo = itemNo;
     }
     
-    public String getArticleType(){
-        return articleType;
+    public String getItemType(){
+        return itemType;
     }
     
-    public void setArticleType(String articleType){
-        this.articleType = articleType;
+    public void setItemType(String itemType){
+        this.itemType = itemType;
     }
     
-    public int getSize(){
-        return size;
+    public int getQuantity(){
+        return quantity;
     }
     
-    public void setSize(int size){
-        this.size = size;
+    public void setQuantity(int quantity){
+        this.quantity = quantity;
     }
     
     public int getTimes(){
