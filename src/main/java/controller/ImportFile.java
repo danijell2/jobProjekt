@@ -24,7 +24,7 @@ import java.util.List;
  */
 public class ImportFile {
     
-    public model.TransitionModel importFile() throws FileNotFoundException, IOException{
+    public model.TransitionModel importFile(String location) throws FileNotFoundException, IOException{
         
         //
             /*
@@ -42,7 +42,7 @@ public class ImportFile {
         
         model.TransitionModel transitionModel = null;
         
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(new File("./test.txt")));
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(location)));
         String line;
         model.Model661 model661 = null;
         model.Model662 model662 = null;
