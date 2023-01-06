@@ -22,82 +22,92 @@ public class Import {
     
     public void startImport(Properties properties){
         
-        // get list of files
-        String files[] = new File(String.valueOf(properties.get("import_folder"))).list();
-        controller.ImportFile importFile = new controller.ImportFile();
-        boolean error = false;
+        System.out.println("Starting importing files");
         
-        // go through all files
-        for(int i = 0; i < files.length; i++){
-            
-            // check if file is txt
-            String file = files[i];
-            
-            if(file.endsWith(".txt")){
-                
-                // import file
-                String location = String.valueOf(properties.get("import_folder"))+file;
-                model.TransitionModel transitionModel = null;
-                
-                try {
-                    
-                    transitionModel = importFile.importFile(location);
-                    
-                } catch (IOException ex) {
-                    Logger.getLogger(Import.class.getName()).log(Level.SEVERE, null, ex);
-                    error = true;
-                }
-                
-                // check if model exist
-                if(transitionModel != null){
-                    
-                    // convert to table1 model
-                    model.Table1Model table1Model = convertToTable1Model(transitionModel, file);
+        // get list of files
+        String files[] = new File(String.valueOf(properties.get("importFolder"))).list();
+        
+        // check if files found
+        if(files != null && files.length > 0){
 
-                    // insert into database
-                    database.Database db = new database.Database((Properties) properties.get("connection"));
-                    table1Model = db.insertTable1(table1Model);
+            controller.ImportFile importFile = new controller.ImportFile();
+            boolean error = false;
+            
+            // go through all files
+            for(int i = 0; i < files.length; i++){
+                
+                // check if file is txt
+                String file = files[i];
+                
+                if(file.endsWith(".txt")){
                     
-                    // check if insert successfull
-                    if(table1Model != null){
+                    // import file
+                    String location = String.valueOf(properties.get("importFolder"))+file;
+                    model.TransitionModel transitionModel = null;
+                    
+                    try {
                         
-                        // message to user
-                        System.out.println("Successfully inserted data into table1.\n Now going to table2");
+                        transitionModel = importFile.importFile(location);
                         
-                        // convert to table2Model
-                        List<model.Table2Model> table2ModelList = convertToTable2ModelList(transitionModel.getModel664List(), table1Model);
+                    } catch (IOException ex) {
+                        Logger.getLogger(Import.class.getName()).log(Level.SEVERE, null, ex);
+                        error = true;
+                    }
+                    
+                    // check if model exist
+                    if(transitionModel != null){
                         
-                        // insert into table2
-                        table2ModelList = db.insertTable2ModelList(table2ModelList);
+                        // convert to table1 model
+                        model.Table1Model table1Model = convertToTable1Model(transitionModel, file);
                         
-                        // check if successfull
-                        if(table2ModelList != null){
-                            System.out.println("Successfully inserted data into table2");
+                        // insert into database
+                        database.Database db = new database.Database((Properties) properties.get("connection"));
+                        table1Model = db.insertTable1(table1Model);
+                        
+                        // check if insert successfull
+                        if(table1Model != null){
                             
-                            // move file to archive folder
-                            moveToArchiveFolder(String.valueOf(properties.get("archive_folder")), file, location);
+                            // message to user
+                            System.out.println("Successfully inserted data into table1.\n Now going to table2");
+                            
+                            // convert to table2Model
+                            List<model.Table2Model> table2ModelList = convertToTable2ModelList(transitionModel.getModel664List(), table1Model);
+                            
+                            // insert into table2
+                            table2ModelList = db.insertTable2ModelList(table2ModelList);
+                            
+                            // check if successfull
+                            if(table2ModelList != null){
+                                System.out.println("Successfully inserted data into table2");
+                                
+                                // move file to archive folder
+                                moveToArchiveFolder(String.valueOf(properties.get("archive_folder")), file, location);
+                                
+                            }else{
+                                System.out.println("error trying to insert into table2.\n Skipping this file");
+                                error = true;
+                            }
                             
                         }else{
-                            System.out.println("error trying to insert into table2.\n Skipping this file");
+                            System.out.println("Error trying to insert data into table1");
                             error = true;
                         }
                         
                     }else{
-                        System.out.println("Error trying to insert data into table1");
                         error = true;
                     }
                     
-                }else{
-                    error = true;
-                }
-                
-                // if error during file reading, transfer the file to error folder
-                if(error){
-                    moveToErrorFolder(String.valueOf(properties.get("error_folder")), file, location);
+                    // if error during file reading, transfer the file to error folder
+                    if(error){
+                        moveToErrorFolder(String.valueOf(properties.get("error_folder")), file, location);
+                    }
+                    
                 }
                 
             }
-  
+            
+        }else{
+            System.out.println("No files found, please check import folder path");
         }
         
     }

@@ -1,18 +1,19 @@
 
 
 ## import folder
-import_folder=./import/
+import_folder=/home/danijell258/NetBeansProjects/Projekt/import/
 
 ## archive folder
-archive_folder=./archive/
+archive_folder=/home/danijell258/NetBeansProjects/Projekt/archive/
 
 ## error folder
-error_folder=./error/
+error_folder=/home/danijell258/NetBeansProjects/Projekt/error/
 
 ## database connection settings // username,password,port
-connection_username=
-connection_password=
-connection_port=
+connection_username=root
+connection_password=123
+connection_port=3306
+connection_path=jdbc:mysql://localhost:8080/jobProjekt
 
 ## protocol folder
-protocol_folder=./protocol/log.txt
+protocol_folder=/home/danijell258/NetBeansProjects/Projekt/protocol/log.txt

@@ -35,7 +35,7 @@ public class Config {
         try {
             
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:8080/jobProjekt");
+            conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:8080/jobProjekt", "root", "123");
             conn.createStatement();
 
            // Class.forName("org.h2.Driver");
