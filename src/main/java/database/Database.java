@@ -64,12 +64,18 @@ public class Database extends Config{
             }
             
         }
-        
-        if(duplicate){
-            
-        }
-        
+
         return table1;
+        
+    }
+    
+    public List<model.Table2Model> table2ModelList(List<model.Model664> list, model.Table1Model table1){
+        
+        List<model.Table2Model> table2ModelList = null;
+        
+        
+        
+        return table2ModelList;
         
     }
     
