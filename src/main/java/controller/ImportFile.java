@@ -276,19 +276,19 @@ ME 43 44 alphanumerisch Mengeneinheit (konstant 'ST')
             String idType = line.substring(0, 3);
             String articleNumber = line.substring(3, 35);
             String articleType = line.substring(35, 39);
-            String size = line.substring(39, 41).replace(" ", line);
-            String times = line.substring(41, 44);
+            String size = line.substring(39, 42);
+            String times = line.substring(42, 44);
             String emptySpace = line.substring(44, 128);
             
             // check if valid
-            if(idType.equals("664") && isNumber(size) && isNumber(times.substring(0, 1)) && times.substring(1).equals("ST") && isEmptySpace(emptySpace)){
+            if(idType.equals("664") && isNumber(size) && times.equals("ST") && isEmptySpace(emptySpace)){
                 
                 // convert to model
                 model = new model.Model664();
                 model.setItemNo(articleNumber);
                 model.setItemType(articleType);
                 model.setQuantity(Integer.valueOf(size));
-                model.setTimes(Integer.valueOf(times.substring(0,1)));
+                model.setTimes(times);
                 
             }
             

@@ -178,7 +178,7 @@ ITEMTYPE Teileart
             model.setItemNo(list.get(i).getItemNo());
             model.setItemType(list.get(i).getItemType());
             model.setMessageId(table1Model.getMessageId());
-            model.setQuantity(list.get(i).getQuantity()*list.get(i).getTimes());
+            model.setQuantity(list.get(i).getQuantity());
             model.setPosition(i+1);
             table2ModelList.add(model);
             

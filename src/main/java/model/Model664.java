@@ -46,7 +46,7 @@ ME 43 44 alphanumerisch Mengeneinheit (konstant 'ST')
     private String itemNo;
     private String itemType;
     private int quantity;
-    private int times;
+    private String times; // Mengeneinheit, but don't see a need to calculate -- to be used in the program
     
     public int getId(){
         return id;
@@ -80,11 +80,11 @@ ME 43 44 alphanumerisch Mengeneinheit (konstant 'ST')
         this.quantity = quantity;
     }
     
-    public int getTimes(){
+    public String getTimes(){
         return times;
     }
     
-    public void setTimes(int times){
+    public void setTimes(String times){
         this.times = times;
     }
     

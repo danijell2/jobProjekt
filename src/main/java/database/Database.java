@@ -84,10 +84,10 @@ public class Database extends Config{
                 ps.setInt(4, table2Model.getQuantity());
                 ps.setString(5, table2Model.getItemType());
                 ps.executeUpdate();
-                
-                conn.close();
-                
+
             }
+            
+            conn.close();
             
         }catch(SQLException ex){
             System.out.println(ex);
