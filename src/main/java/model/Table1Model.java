@@ -35,7 +35,7 @@ COMMODITY Teileartgruppe des Bauteils
     private LocalDateTime transmission;
     private int supplier;
     private int customer;
-    private int referenceNo;
+    private long referenceNo;
     private String commodity;
     
     public int getMessageId(){
@@ -86,11 +86,11 @@ COMMODITY Teileartgruppe des Bauteils
         this.customer = customer;
     }
     
-    public int getReferenceNo(){
+    public long getReferenceNo(){
         return referenceNo;
     }
     
-    public void setReferenceNo(int referenceNo){
+    public void setReferenceNo(long referenceNo){
         this.referenceNo = referenceNo;
     }
     

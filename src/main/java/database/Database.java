@@ -36,7 +36,7 @@ public class Database extends Config{
             ps.setTimestamp(2, Timestamp.valueOf(table1.getTransmission()));
             ps.setInt(3, table1.getSupplier());
             ps.setInt(4, table1.getCustomer());
-            ps.setInt(5, table1.getReferenceNo());
+            ps.setLong(5, table1.getReferenceNo());
             ps.setString(6, table1.getCommodity());
             int count = ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();

@@ -221,7 +221,7 @@ id   orderNumber identificationOrderNumber idItem itemType
                 model662 = new model.Model662();
                 model662.setOrderNo(Integer.valueOf(orderNumber));
                 model662.setOrderNumberIdentification(orderNumberIdentification);
-                model662.setReferenceNo(Integer.valueOf(itemNumber));
+                model662.setReferenceNo(Long.valueOf(itemNumber));
                 model662.setCommodity(itemType);
                 
             }else{
@@ -352,7 +352,7 @@ Anz.664 4 10 numerisch Anzahl der 664er-Sätze in dieser Datei
         
         try{
             
-            int number = Integer.valueOf(text);
+            Double number = Double.valueOf(text);
             state = true;
             
         }catch(NumberFormatException ex){
