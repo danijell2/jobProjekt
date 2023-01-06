@@ -81,7 +81,7 @@ public class Import {
                                 System.out.println("Successfully inserted data into table2");
                                 
                                 // move file to archive folder
-                                moveToArchiveFolder(String.valueOf(properties.get("archive_folder")), file, location);
+                                moveToArchiveFolder(String.valueOf(properties.get("archiveFolder")), file, location);
                                 
                             }else{
                                 System.out.println("error trying to insert into table2.\n Skipping this file");
@@ -99,7 +99,7 @@ public class Import {
                     
                     // if error during file reading, transfer the file to error folder
                     if(error){
-                        moveToErrorFolder(String.valueOf(properties.get("error_folder")), file, location);
+                        moveToErrorFolder(String.valueOf(properties.get("errorFolder")), file, location);
                     }
                     
                 }

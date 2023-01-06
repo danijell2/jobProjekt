@@ -94,11 +94,16 @@ public class ImportFile {
                     }else{
                         
                         // continue with 669 model
-                        model669 = read669(line);
-                        
                         if(model669 == null){
-                            System.out.println("No model 669 type found");
-                            break;
+                            
+                            model669 = read669(line);
+                            
+                            if(model669 == null){
+                                System.out.println("No model 669 type found");
+                                break;
+                                
+                            }
+                            
                         }
                         
                     }
