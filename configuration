@@ -1,0 +1,13 @@
+
+
+## import folder
+import_folder=./import/
+
+## archive folder
+archive_folder=./archive/
+
+## error folder
+error_folder=./error/
+
+## database connection settings // username,password,port
+connection_settings=username,password,port

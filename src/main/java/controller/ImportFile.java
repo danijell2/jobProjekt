@@ -24,7 +24,23 @@ import java.util.List;
  */
 public class ImportFile {
     
-    public void importFile() throws FileNotFoundException, IOException{
+    public model.TransitionModel importFile() throws FileNotFoundException, IOException{
+        
+        //
+            /*
+            661120    4711   15      202305011440
+            6627641M1002301323456                    A0
+            664A9183738  ZX                    MT  004ST
+            664PK2782938                       MT  001ST
+            6643B0976456AXZEU                  PT  002ST
+            6649B5567801  TXA                  PT  001ST
+            664A83748393                       XT  003ST
+            6690000005
+            
+            */
+            
+        
+        model.TransitionModel transitionModel = null;
         
         BufferedReader bufferedReader = new BufferedReader(new FileReader(new File("./test.txt")));
         String line;
@@ -34,6 +50,7 @@ public class ImportFile {
         boolean model662Exist = false;
         int count = 0;
         List<model.Model664> model664List = new ArrayList();
+        model.Model669 model669 = null;
         
         while((line = bufferedReader.readLine()) != null){
             
@@ -73,7 +90,12 @@ public class ImportFile {
                     }else{
                         
                         // continue with 669 model
-                        model.Model669 model669 = read669(line);
+                        model669 = read669(line);
+                        
+                        if(model669 == null){
+                            System.out.println("No model 669 type found");
+                            break;
+                        }
                         
                     }
                     
@@ -81,24 +103,23 @@ public class ImportFile {
                 
                 
             }
-            
-            //
-            /*
-            661120    4711   15      202305011440
-            6627641M1002301323456                    A0
-            664A9183738  ZX                    MT  004ST
-            664PK2782938                       MT  001ST
-            6643B0976456AXZEU                  PT  002ST
-            6649B5567801  TXA                  PT  001ST
-            664A83748393                       XT  003ST
-            6690000005
-            
-            */
-            
-            
+
         }
         
         bufferedReader.close();
+        
+        // check if everything alright
+        if(model661 != null && model662 != null && model664List.size() > 0 && model669 != null){
+            
+            transitionModel = new model.TransitionModel();
+            transitionModel.setModel661(model661);
+            transitionModel.setModel662(model662);
+            transitionModel.setModel664List(model664List);
+            transitionModel.setModel669(model669);
+            
+        }
+        
+        return transitionModel;
         
     }
     

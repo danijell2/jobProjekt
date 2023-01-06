@@ -16,9 +16,9 @@
 - the message needs to entail timestamp
 
 # configutation file which is read by start of the program
-- file type from import file
-- file type for archive file
-- file type for error type
+- path for import files folder
+- path for for archive folder
+- path for for error folder
 - time between reindex/search of new files (in seconds)
 - database connection configuration
 

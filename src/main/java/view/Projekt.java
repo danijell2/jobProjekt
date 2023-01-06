@@ -5,6 +5,15 @@
 
 package view;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author danijell258
@@ -20,8 +29,20 @@ public class Projekt {
     
     private void start(){
         
-        // import file
+        // import configuration
+        Properties properties = controller.ImportConfiguration.importConfiguration();
         
+        if(properties != null){
+            
+            // import file
+            
+        }else{
+            
+            System.out.println("Configuration error");
+            System.exit(0);
+            
+        }
+ 
     }
     
 }
