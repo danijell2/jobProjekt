@@ -166,7 +166,7 @@ public class ImportFile {
                 model = new model.Model661();
                 model.setSupplier(Integer.valueOf(deliveryNumber));
                 model.setCustomer(Integer.valueOf(customerNumber));
-                model.setSendDate(LocalDate.parse(sendDate, DateTimeFormatter.ofPattern("YYYYMMDD")));
+                model.setSendDate(LocalDate.parse(sendDate, DateTimeFormatter.ofPattern("yyyyMMdd")));
                 model.setSendTime(LocalTime.parse(sendTime, DateTimeFormatter.ofPattern("HHMM")));
                 
             }else{
@@ -369,14 +369,14 @@ Anz.664 4 10 numerisch Anzahl der 664er-Sätze in dieser Datei
         
         try{
             
-            LocalDate date = LocalDate.parse(text, DateTimeFormatter.ofPattern("YYYYMMDD"));
+            LocalDate date = LocalDate.parse(text, DateTimeFormatter.ofPattern("yyyyMMdd"));
             state = true;
             
         }catch(DateTimeParseException exception){
             state = false;
         }
         
-        return false;
+        return state;
         
     }
     
