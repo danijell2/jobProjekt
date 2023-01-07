@@ -1,4 +1,5 @@
-Sat Jan 07 10:05:21 UTC 2023: Configuration imported succesffully
-Sat Jan 07 10:05:22 UTC 2023: Task scheduler is initiating new scan
-Sat Jan 07 10:05:22 UTC 2023: Starting importing files
-Sat Jan 07 10:05:22 UTC 2023: No files found, please check import folder path
+Sat Jan 07 10:08:18 UTC 2023: Configuration imported succesffully
+Sat Jan 07 10:08:19 UTC 2023: Task scheduler is initiating new scan
+Sat Jan 07 10:08:19 UTC 2023: Starting importing files
+Sat Jan 07 10:08:19 UTC 2023: model 661 type not found
+Sat Jan 07 10:08:19 UTC 2023: File test.txt moved to error folder
