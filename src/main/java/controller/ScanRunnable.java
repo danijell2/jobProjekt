@@ -12,21 +12,24 @@ import java.util.Properties;
  */
 public class ScanRunnable extends Commons implements Runnable{
 
-    private Properties properties;
-    
     @Override
     public void run() {
         
-        super.setProperties(properties);
+        //super.setProperties(properties);
         super.log("Task scheduler is initiating new scan");
         
-        controller.Import importContr = new controller.Import(properties);
-        importContr.startImport(properties);
-
+        controller.Import importContr = new controller.Import(super.getProperties());
+        importContr.startImport();
+        
+        // show all records
+        super.log("Gettings all records from database");
+        controller.ShowRecords records = new controller.ShowRecords(super.getProperties());
+        records.show();
+        
     }
     
     public void setProperties(Properties properties){
-        this.properties = properties;
+        super.setProperties(properties);
     }
     
 }

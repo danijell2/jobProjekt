@@ -5,6 +5,7 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  *
@@ -37,6 +38,7 @@ COMMODITY Teileartgruppe des Bauteils
     private int customer;
     private long referenceNo;
     private String commodity;
+    private List<model.Table2Model> table2List;
     
     public int getMessageId(){
         return messageId;
@@ -100,6 +102,14 @@ COMMODITY Teileartgruppe des Bauteils
     
     public void setCommodity(String commodity){
         this.commodity = commodity;
+    }
+    
+    public List<model.Table2Model> getTable2List(){
+        return table2List;
+    }
+    
+    public void setTable2List(List<model.Table2Model> table2List){
+        this.table2List = table2List;
     }
     
 }

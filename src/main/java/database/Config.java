@@ -16,16 +16,16 @@ import java.util.logging.Logger;
  * @author danijell258
  */
 
-public class Config {
-    
-    private Properties settings;
-    
-    public Properties getSettings(){
-        return settings;
+public class Config extends controller.Commons{
+
+    @Override
+    public Properties getProperties(){
+        return super.getProperties();
     }
     
-    public void setSettings(Properties settings){
-        this.settings = settings;
+    @Override
+    public void setProperties(Properties properties){
+        super.setProperties(properties);
     }
     
     public Connection conn(){
@@ -35,6 +35,7 @@ public class Config {
         try {
             
             Class.forName("com.mysql.jdbc.Driver").newInstance();
+            Properties settings = (Properties) getProperties().get("connection");
             String username = String.valueOf(settings.get("username"));
             String password = String.valueOf(settings.get("password"));
             String path = String.valueOf(settings.get("path"));
@@ -45,11 +46,36 @@ public class Config {
             // Class.forName("org.h2.Driver");
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+            super.log(String.valueOf(ex));
         }
         
         return conn;
         
+    }
+    
+    public boolean isWorking(Properties properties){
+        
+        super.setProperties(properties);
+        
+        boolean state = false;
+        
+        try(Connection conn = conn()){
+            
+            if(conn != null){
+                state = true;
+            }
+            
+        } catch (SQLException ex) {
+            super.log(String.valueOf(ex));
+        }
+        
+        return state;
+        
+    }
+    
+    @Override
+    public void log(String text){
+        super.log(text);
     }
     
 }

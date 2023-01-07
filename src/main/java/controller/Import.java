@@ -24,17 +24,17 @@ public class Import extends Commons{
         super.setProperties(properties);
     }
     
-    public void startImport(Properties properties){
+    public void startImport(){
         
         super.log("Starting importing files");
         
         // get list of files
-        String files[] = new File(String.valueOf(properties.get("importFolder"))).list();
+        String files[] = new File(String.valueOf(super.getProperties().get("importFolder"))).list();
         
         // check if files found
         if(files != null && files.length > 0){
 
-            controller.ImportFile importFile = new controller.ImportFile(properties);
+            controller.ImportFile importFile = new controller.ImportFile(super.getProperties());
             boolean error = false;
             
             // go through all files
@@ -46,11 +46,10 @@ public class Import extends Commons{
                 if(file.endsWith(".txt")){
                     
                     // import file
-                    String location = String.valueOf(properties.get("importFolder"))+file;
+                    String location = String.valueOf(super.getProperties().get("importFolder"))+file;
                     model.TransitionModel transitionModel = null;
                     
                     try {
-                        
                         transitionModel = importFile.importFile(location);
                         
                     } catch (IOException ex) {
@@ -65,7 +64,7 @@ public class Import extends Commons{
                         model.Table1Model table1Model = convertToTable1Model(transitionModel, file);
                         
                         // insert into database
-                        database.Database db = new database.Database((Properties) properties.get("connection"));
+                        database.Database db = new database.Database(super.getProperties());
                         table1Model = db.insertTable1(table1Model);
                         
                         // check if insert successfull
@@ -85,7 +84,7 @@ public class Import extends Commons{
                                 super.log("Successfully inserted data into table2");
                                 
                                 // move file to archive folder
-                                moveToArchiveFolder(String.valueOf(properties.get("archiveFolder")), file, location);
+                                moveToArchiveFolder(String.valueOf(super.getProperties().get("archiveFolder")), file, location);
                                 
                             }else{
                                 super.log("error trying to insert into table2.\n Skipping this file");
@@ -103,7 +102,7 @@ public class Import extends Commons{
                     
                     // if error during file reading, transfer the file to error folder
                     if(error){
-                        moveToErrorFolder(String.valueOf(properties.get("errorFolder")), file, location);
+                        moveToErrorFolder(String.valueOf(super.getProperties().get("errorFolder")), file, location);
                     }
                     
                 }

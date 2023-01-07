@@ -1,4 +1,225 @@
-Sat Jan 07 10:31:25 UTC 2023: Configuration imported succesffully
-Sat Jan 07 10:31:26 UTC 2023: Task scheduler is initiating new scan
-Sat Jan 07 10:31:26 UTC 2023: Starting importing files
-Sat Jan 07 10:31:26 UTC 2023: No files found, please check import folder path
+Sat Jan 07 15:04:54 UTC 2023: Configuration imported succesffully
+Sat Jan 07 15:04:54 UTC 2023: Task scheduler is initiating new scan
+Sat Jan 07 15:04:54 UTC 2023: Starting importing files
+Sat Jan 07 15:04:54 UTC 2023: No files found, please check import folder path
+Sat Jan 07 15:04:54 UTC 2023: Gettings all records from database
+Sat Jan 07 15:04:54 UTC 2023: Showing in descending order from last modified record
+Sat Jan 07 15:04:55 UTC 2023: 
+messageId: 5
+filename: 
+commodity: A0  
+customer: 4711
+orderNo: 7641
+referenceNo: 2301323456
+supplier: 120
+transmission: 2023-05-01T14:00
+there are 5 items:
+position: 1
+itemsNo: A9183738  ZX                    
+itemType: MT  
+quantity: 4
+position: 2
+itemsNo: PK2782938                       
+itemType: MT  
+quantity: 1
+position: 3
+itemsNo: 3B0976456AXZEU                  
+itemType: PT  
+quantity: 2
+position: 4
+itemsNo: 9B5567801  TXA                  
+itemType: PT  
+quantity: 1
+position: 5
+itemsNo: A83748393                       
+itemType: XT  
+quantity: 3
+
+
+messageId: 6
+filename: 
+commodity: A0  
+customer: 4711
+orderNo: 7641
+referenceNo: 2301323456
+supplier: 120
+transmission: 2023-05-01T14:00
+there are 5 items:
+position: 1
+itemsNo: A9183738  ZX                    
+itemType: MT  
+quantity: 4
+position: 2
+itemsNo: PK2782938                       
+itemType: MT  
+quantity: 1
+position: 3
+itemsNo: 3B0976456AXZEU                  
+itemType: PT  
+quantity: 2
+position: 4
+itemsNo: 9B5567801  TXA                  
+itemType: PT  
+quantity: 1
+position: 5
+itemsNo: A83748393                       
+itemType: XT  
+quantity: 3
+
+
+messageId: 7
+filename: 
+commodity: A0  
+customer: 4711
+orderNo: 7641
+referenceNo: 2301323456
+supplier: 120
+transmission: 2023-05-01T14:00
+there are 5 items:
+position: 1
+itemsNo: A9183738  ZX                    
+itemType: MT  
+quantity: 4
+position: 2
+itemsNo: PK2782938                       
+itemType: MT  
+quantity: 1
+position: 3
+itemsNo: 3B0976456AXZEU                  
+itemType: PT  
+quantity: 2
+position: 4
+itemsNo: 9B5567801  TXA                  
+itemType: PT  
+quantity: 1
+position: 5
+itemsNo: A83748393                       
+itemType: XT  
+quantity: 3
+
+
+messageId: 8
+filename: 
+commodity: A0  
+customer: 4711
+orderNo: 7641
+referenceNo: 2301323456
+supplier: 120
+transmission: 2023-05-01T14:00
+there are 5 items:
+position: 1
+itemsNo: A9183738  ZX                    
+itemType: MT  
+quantity: 4
+position: 2
+itemsNo: PK2782938                       
+itemType: MT  
+quantity: 1
+position: 3
+itemsNo: 3B0976456AXZEU                  
+itemType: PT  
+quantity: 2
+position: 4
+itemsNo: 9B5567801  TXA                  
+itemType: PT  
+quantity: 1
+position: 5
+itemsNo: A83748393                       
+itemType: XT  
+quantity: 3
+
+
+messageId: 9
+filename: 
+commodity: A0  
+customer: 4711
+orderNo: 7641
+referenceNo: 2301323456
+supplier: 120
+transmission: 2023-05-01T14:00
+there are 5 items:
+position: 1
+itemsNo: A9183738  ZX                    
+itemType: MT  
+quantity: 4
+position: 2
+itemsNo: PK2782938                       
+itemType: MT  
+quantity: 1
+position: 3
+itemsNo: 3B0976456AXZEU                  
+itemType: PT  
+quantity: 2
+position: 4
+itemsNo: 9B5567801  TXA                  
+itemType: PT  
+quantity: 1
+position: 5
+itemsNo: A83748393                       
+itemType: XT  
+quantity: 3
+
+
+messageId: 10
+filename: 
+commodity: A0  
+customer: 4711
+orderNo: 7641
+referenceNo: 2301323456
+supplier: 120
+transmission: 2023-05-01T14:00
+there are 5 items:
+position: 1
+itemsNo: A9183738  ZX                    
+itemType: MT  
+quantity: 4
+position: 2
+itemsNo: PK2782938                       
+itemType: MT  
+quantity: 1
+position: 3
+itemsNo: 3B0976456AXZEU                  
+itemType: PT  
+quantity: 2
+position: 4
+itemsNo: 9B5567801  TXA                  
+itemType: PT  
+quantity: 1
+position: 5
+itemsNo: A83748393                       
+itemType: XT  
+quantity: 3
+
+
+messageId: 11
+filename: 
+commodity: A0  
+customer: 4711
+orderNo: 7641
+referenceNo: 2301323456
+supplier: 120
+transmission: 2023-05-01T14:00
+there are 5 items:
+position: 1
+itemsNo: A9183738  ZX                    
+itemType: MT  
+quantity: 4
+position: 2
+itemsNo: PK2782938                       
+itemType: MT  
+quantity: 1
+position: 3
+itemsNo: 3B0976456AXZEU                  
+itemType: PT  
+quantity: 2
+position: 4
+itemsNo: 9B5567801  TXA                  
+itemType: PT  
+quantity: 1
+position: 5
+itemsNo: A83748393                       
+itemType: XT  
+quantity: 3
+
+
+

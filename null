@@ -1,2 +1,6 @@
 Task scheduler is initiating new scanStarting importing filesSuccessfully inserted data into table1.
- Now going to table2Successfully inserted data into table2File test.txt moved to archive folderTask scheduler is initiating new scanStarting importing filesNo files found, please check import folder path
+ Now going to table2Successfully inserted data into table2File test.txt moved to archive folderTask scheduler is initiating new scanStarting importing filesNo files found, please check import folder pathSat Jan 07 13:23:45 UTC 2023: java.sql.SQLException: Access denied for user '='@'192.168.2.43' (using password: YES)
+Sat Jan 07 13:41:18 UTC 2023: Date and time cannot be before last inserted record which is 2023-05-01 14:00:00.0
+Sat Jan 07 13:41:18 UTC 2023: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`job_projekt`.`table2`, CONSTRAINT `table2_ibfk_1` FOREIGN KEY (`messageId`) REFERENCES `table1` (`messageId`) ON DELETE CASCADE ON UPDATE CASCADE)
+Sat Jan 07 13:43:01 UTC 2023: Date and time cannot be before last inserted record which is 2023-05-01 14:00:00.0
+Sat Jan 07 14:28:58 UTC 2023: java.sql.SQLException: Column 'filename' not found.

@@ -26,6 +26,10 @@ public class Commons {
         this.properties = properties;
     }
     
+    public Properties getProperties(){
+        return this.properties;
+    }
+    
     public void log(String message){
 
         try {
