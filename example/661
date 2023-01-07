@@ -1,0 +1,32 @@
+
+
+
+
+
+id       delivery   customerNumber sendNumber sendDate sendTime
+661      120        4711           15         20230501 14:40  
+empty space required when ending
+
+# 661 constraints
+- id -- 661, starts at 1, ends at 3     
+- delivery -- id of delivery, starts at 4 - ends at 10
+- customer -- id of customer, starts at 11 - ends at 17
+- sendNumber -- send number, starts at 18 - ends at 25
+- sendDate -- sending date, format YYYYMMDD, starts at 26 - ends at 33
+- sendTime -- sending time, format HHMM, starts at 34 - ends at 37
+- empty space, starts at 38 - ends at 128 
+
+-- must be at begining and only one row
+
+
+# example
+661120    4711   15      202305011440                                                                                           
+
+#
+'661' 1 3 numerisch Kennzeichen des 661-Satzes
+Lieferant 4 10 numerisch Lieferantennummer
+Kunde 11 17 numerisch Kundennummer
+Übertr.nr. 18 25 numerisch neue Übertragungsnummer
+Übertr.datum 26 33 numerisch Übertragungsdatum (Format JJJJMMTT)
+Übertr.zeit 34 37 numerisch Übertragungszeit (Format HHMM)
+(leer) 38 128 alphanumerisch konstant ' ' (Leerzeichen

@@ -1,0 +1,60 @@
+
+
+## main part
+- read txt files in a folder -- finished
+- detect data type -- not neccesary(?)
+- sava data into mysql database -- finished
+
+## features of the program
+
+# after defined time reindex/import new data -- finished
+- new data with last modified in ascending order
+- after data import move the file to archive folder -- finished
+
+# messages of the program stored in a file
+- display those messages onscreen -- finished
+- the message needs to entail timestamp
+
+# configuration file which is read by start of the program
+- path for import files folder -- finished
+- path for for archive folder -- finished
+- path for for error folder -- finished
+- time between reindex/search of new files (in minutes) -- finished
+- database connection configuration -- finished
+
+## error check
+
+# while starting the programm
+- check for configuration file -- finished
+- if missing or wrong value terminate program with message to user -- finished
+
+# during work in program 
+- check if found files can be opened and read -- finished
+- check for syntax id 661, 662, 664, 669 -- finished
+- all fields with id needs to contain value -- finished
+- check for character correct in numeric field
+- check for correct date and time in transfer date and time
+- the 664 id amount should match the number in 669 -- finished
+- if error while reading file, move it into error folder and log it
+
+## mysql table 
+
+table 1:
+MESSAGEID eindeutige NachrichtenID
+FILENAME Dateiname der eingelesenen Datei
+ORDERNO Bestellnummer
+TRANSMISSION Übertragungsdatum und –zeit
+SUPPLIER Lieferantennummer
+CUSTOMER Kundennummer
+REFERENCENO Kennnummer des Bauteils
+COMMODITY Teileartgruppe des Bauteils
+
+table 2:
+MESSAGEID eindeutige NachrichtenID
+POSITION fortlaufende Positionsnummer zur NachrichtenID (ab 1)
+ITEMNO Artikelnummer
+QUANTITY bestellte Menge
+ITEMTYPE Teileart 
+
+# primary and foreign key MESSAGEID -- 1:n-Relation 
+- per file MESSAGEID primary key auto_increment 

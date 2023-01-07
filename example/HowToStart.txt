@@ -1,0 +1,6 @@
+
+
+## command in terminal linux
+java -jar test-Projekt-1.0-SNAPSHOT.jar 
+
+## need to edit configuration before start and create database included in sql

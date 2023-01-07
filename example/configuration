@@ -1,0 +1,22 @@
+
+
+## import folder
+import_folder=/home/danijell258/NetBeansProjects/Projekt/example/import/
+
+## archive folder
+archive_folder=/home/danijell258/NetBeansProjects/Projekt/example/archive/
+
+## error folder
+error_folder=/home/danijell258/NetBeansProjects/Projekt/example/error/
+
+## database connection settings // username,password,port
+connection_username=admin
+connection_password=123
+connection_port=3306
+connection_path=jdbc:mysql://192.168.2.1/job_projekt
+
+## time to reindex/rescan new files -- in minutes
+time_interval=1
+
+## log folder
+log_folder=/home/danijell258/NetBeansProjects/Projekt/example/log/log.txt
