@@ -34,11 +34,15 @@ public class Projekt {
         
         if(properties != null){
             
-            // import files
-            controller.Import importContr = new controller.Import();
-            importContr.startImport(properties);
+            // set periodic scan
+            System.out.println("Setting up task scheduler to scan every minute for new files");
+            controller.PeriodicScan scan = new controller.PeriodicScan();
+            scan.startListening(properties);
             
-            importContr = null;
+//            controller.Import importContr = new controller.Import();
+//            importContr.startImport(properties);
+            
+//            importContr = null;
             
         }else{
             

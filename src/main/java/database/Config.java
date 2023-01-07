@@ -35,10 +35,14 @@ public class Config {
         try {
             
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conn = (Connection) DriverManager.getConnection("jdbc:mysql://192.168.2.1/job_projekt", "admin", "123");
+            String username = String.valueOf(settings.get("username"));
+            String password = String.valueOf(settings.get("password"));
+            String path = String.valueOf(settings.get("path"));
+            
+            conn = (Connection) DriverManager.getConnection(path, username, password);
             conn.createStatement();
-
-           // Class.forName("org.h2.Driver");
+            
+            // Class.forName("org.h2.Driver");
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);

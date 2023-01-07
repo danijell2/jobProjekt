@@ -34,6 +34,7 @@ public class ImportConfiguration {
         String port = null;
         String path = null;
         String protocolFolder = null;
+        String timeInterval = null;
         
         try {
             
@@ -75,6 +76,10 @@ public class ImportConfiguration {
                     
                     protocolFolder = protocolFolder.substring(1);
                     
+                }else if(line.contains("time_interval=") && (timeInterval = line.substring(line.indexOf("time_interval=")+14)).length() > 1){
+                    
+                    timeInterval = timeInterval.substring(1);
+                    
                 }
                 
             }
@@ -89,13 +94,14 @@ public class ImportConfiguration {
         
         // validate imported data
         if(importFolder != null && archiveFolder != null && errorFolder != null && protocolFolder != null
-                && username != null && password != null && port != null && path != null){
+                && username != null && password != null && port != null && path != null && timeInterval != null && isNumber(timeInterval)){
             
             properties = new Properties();
             properties.put("importFolder", importFolder);
             properties.put("archiveFolder", archiveFolder);
             properties.put("errorFolder", errorFolder);
             properties.put("protocolFolder", protocolFolder);
+            properties.put("timeInterval", timeInterval);
             
             // save connection settings
             Properties connection = new Properties();
@@ -103,13 +109,31 @@ public class ImportConfiguration {
             connection.put("password", password);
             connection.put("port", port);
             connection.put("path", path);
-            properties.put(connection, connection);
+            properties.put("connection", connection);
             
             System.out.println("Configuration imported succesffully");
             
         }
         
         return properties;
+        
+    }
+    
+    private static boolean isNumber(String text){
+        
+        boolean state = false;
+        
+        try{
+            
+            int number = Integer.valueOf(text);
+            state = true;
+            
+        }catch(NumberFormatException ex){
+            System.out.println("Set time interval for folder scan not valid.\n terminating program");
+            System.exit(0);
+        }
+        
+        return state;
         
     }
     

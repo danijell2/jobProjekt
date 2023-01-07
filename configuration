@@ -10,10 +10,13 @@ archive_folder=/home/danijell258/NetBeansProjects/Projekt/archive/
 error_folder=/home/danijell258/NetBeansProjects/Projekt/error/
 
 ## database connection settings // username,password,port
-connection_username=root
+connection_username=admin
 connection_password=123
 connection_port=3306
-connection_path=jdbc:mysql://localhost:8080/jobProjekt
+connection_path=jdbc:mysql://192.168.2.1/job_projekt
+
+## time to reindex/rescan new files -- in minutes
+time_interval=1
 
 ## protocol folder
 protocol_folder=/home/danijell258/NetBeansProjects/Projekt/protocol/log.txt
