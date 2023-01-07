@@ -18,11 +18,15 @@ import java.util.logging.Logger;
  * @author danijell258
  */
 
-public class Import {
+public class Import extends Commons{
+    
+    public Import(Properties properties){
+        super.setProperties(properties);
+    }
     
     public void startImport(Properties properties){
         
-        System.out.println("Starting importing files");
+        super.log("Starting importing files");
         
         // get list of files
         String files[] = new File(String.valueOf(properties.get("importFolder"))).list();
@@ -30,7 +34,7 @@ public class Import {
         // check if files found
         if(files != null && files.length > 0){
 
-            controller.ImportFile importFile = new controller.ImportFile();
+            controller.ImportFile importFile = new controller.ImportFile(properties);
             boolean error = false;
             
             // go through all files
@@ -68,7 +72,7 @@ public class Import {
                         if(table1Model != null){
                             
                             // message to user
-                            System.out.println("Successfully inserted data into table1.\n Now going to table2");
+                            super.log("Successfully inserted data into table1.\n Now going to table2");
                             
                             // convert to table2Model
                             List<model.Table2Model> table2ModelList = convertToTable2ModelList(transitionModel.getModel664List(), table1Model);
@@ -78,18 +82,18 @@ public class Import {
                             
                             // check if successfull
                             if(table2ModelList != null){
-                                System.out.println("Successfully inserted data into table2");
+                                super.log("Successfully inserted data into table2");
                                 
                                 // move file to archive folder
                                 moveToArchiveFolder(String.valueOf(properties.get("archiveFolder")), file, location);
                                 
                             }else{
-                                System.out.println("error trying to insert into table2.\n Skipping this file");
+                                super.log("error trying to insert into table2.\n Skipping this file");
                                 error = true;
                             }
                             
                         }else{
-                            System.out.println("Error trying to insert data into table1");
+                            super.log("Error trying to insert data into table1");
                             error = true;
                         }
                         
@@ -107,7 +111,7 @@ public class Import {
             }
             
         }else{
-            System.out.println("No files found, please check import folder path");
+            super.log("No files found, please check import folder path");
         }
         
     }
@@ -119,9 +123,9 @@ public class Import {
         boolean isMoved = oldLocationFile.renameTo(new File(newLocation));
         
         if(isMoved){
-            System.out.println("File "+filename+" moved to archive folder");
+            super.log("File "+filename+" moved to archive folder");
         }else{
-            System.out.println("Error trying to move "+filename+" file");
+            super.log("Error trying to move "+filename+" file");
         }
         
     }
@@ -134,9 +138,9 @@ public class Import {
         boolean isMoved = oldLocationFile.renameTo(new File(newLocation));
         
         if(isMoved){
-            System.out.println("File "+filename+" moved to error folder");
+            super.log("File "+filename+" moved to error folder");
         }else{
-            System.out.println("Error trying to move "+filename+" file");
+            super.log("Error trying to move "+filename+" file");
         }
         
     }

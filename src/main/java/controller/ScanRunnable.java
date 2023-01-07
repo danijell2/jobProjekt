@@ -10,15 +10,17 @@ import java.util.Properties;
  *
  * @author danijell258
  */
-public class ScanRunnable implements Runnable{
+public class ScanRunnable extends Commons implements Runnable{
 
     private Properties properties;
     
     @Override
     public void run() {
         
-        System.out.println("Task scheduler is initiating new scan");
-        controller.Import importContr = new controller.Import();
+        super.setProperties(properties);
+        super.log("Task scheduler is initiating new scan");
+        
+        controller.Import importContr = new controller.Import(properties);
         importContr.startImport(properties);
 
     }

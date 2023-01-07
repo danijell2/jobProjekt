@@ -19,9 +19,9 @@ import view.Projekt;
  * @author danijell258
  */
 
-public class ImportConfiguration {
+public class ImportConfiguration extends Commons{
     
-    public static Properties importConfiguration(){
+    public Properties importConfiguration(){
         
         System.out.println("Starting configuration import");
         
@@ -33,7 +33,7 @@ public class ImportConfiguration {
         String password = null;
         String port = null;
         String path = null;
-        String protocolFolder = null;
+        String logFolder = null;
         String timeInterval = null;
         
         try {
@@ -72,9 +72,9 @@ public class ImportConfiguration {
                     
                     path = path.substring(1);
                     
-                }else if(line.contains("protocol_folder=") && (protocolFolder = line.substring(line.indexOf("protocol_folder=")+15)).length() > 1){
+                }else if(line.contains("log_folder=") && (logFolder = line.substring(line.indexOf("log_folder=")+10)).length() > 1){
                     
-                    protocolFolder = protocolFolder.substring(1);
+                    logFolder = logFolder.substring(1);
                     
                 }else if(line.contains("time_interval=") && (timeInterval = line.substring(line.indexOf("time_interval=")+14)).length() > 1){
                     
@@ -93,14 +93,14 @@ public class ImportConfiguration {
         }
         
         // validate imported data
-        if(importFolder != null && archiveFolder != null && errorFolder != null && protocolFolder != null
+        if(importFolder != null && archiveFolder != null && errorFolder != null && logFolder != null
                 && username != null && password != null && port != null && path != null && timeInterval != null && isNumber(timeInterval)){
             
             properties = new Properties();
             properties.put("importFolder", importFolder);
             properties.put("archiveFolder", archiveFolder);
             properties.put("errorFolder", errorFolder);
-            properties.put("protocolFolder", protocolFolder);
+            properties.put("logFolder", logFolder);
             properties.put("timeInterval", timeInterval);
             
             // save connection settings
@@ -111,7 +111,10 @@ public class ImportConfiguration {
             connection.put("path", path);
             properties.put("connection", connection);
             
-            System.out.println("Configuration imported succesffully");
+            // initialize log
+            super.setProperties(properties);
+            super.resetLog();
+            super.log("Configuration imported succesffully");
             
         }
         
@@ -119,7 +122,7 @@ public class ImportConfiguration {
         
     }
     
-    private static boolean isNumber(String text){
+    private boolean isNumber(String text){
         
         boolean state = false;
         

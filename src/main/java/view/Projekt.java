@@ -5,14 +5,7 @@
 
 package view;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -30,13 +23,14 @@ public class Projekt {
     private void start(){
         
         // import configuration
-        Properties properties = controller.ImportConfiguration.importConfiguration();
+        //Properties properties = controller.ImportConfiguration.importConfiguration();
+        Properties properties = new controller.ImportConfiguration().importConfiguration();
         
         if(properties != null){
             
             // set periodic scan
             System.out.println("Setting up task scheduler to scan every minute for new files");
-            controller.PeriodicScan scan = new controller.PeriodicScan();
+            controller.PeriodicScan scan = new controller.PeriodicScan(properties);
             scan.startListening(properties);
             
 //            controller.Import importContr = new controller.Import();

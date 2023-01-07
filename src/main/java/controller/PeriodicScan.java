@@ -14,7 +14,11 @@ import java.util.concurrent.TimeUnit;
  * @author danijell258
  */
 
-public class PeriodicScan {
+public class PeriodicScan extends Commons{
+    
+    public PeriodicScan(Properties properties){
+        super.setProperties(properties);
+    }
     
     // set scheduled task
     private ScheduledExecutorService scheduler;

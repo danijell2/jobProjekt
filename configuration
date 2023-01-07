@@ -18,5 +18,5 @@ connection_path=jdbc:mysql://192.168.2.1/job_projekt
 ## time to reindex/rescan new files -- in minutes
 time_interval=1
 
-## protocol folder
-protocol_folder=/home/danijell258/NetBeansProjects/Projekt/protocol/log.txt
+## log folder
+log_folder=/home/danijell258/NetBeansProjects/Projekt/log/log.txt

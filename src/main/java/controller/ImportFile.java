@@ -17,12 +17,17 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  *
  * @author danijell258
  */
-public class ImportFile {
+public class ImportFile extends Commons{
+    
+    public ImportFile(Properties properties){
+        super.setProperties(properties);
+    }
     
     public model.TransitionModel importFile(String location) throws FileNotFoundException, IOException{
         
@@ -61,7 +66,7 @@ public class ImportFile {
                 
                 // check for error
                 if(model661 == null){
-                    System.out.println("model 661 type not found");
+                    super.log("model 661 type not found");
                     break;     
                 }
               
@@ -73,7 +78,7 @@ public class ImportFile {
                     model662 = read662(line);
                     
                     if(model662 == null){
-                        System.out.println("model 662 type not found");
+                        super.log("model 662 type not found");
                         break;
                     }
                     
@@ -88,7 +93,7 @@ public class ImportFile {
                         
                     }else if(model664List.isEmpty()){
                         
-                        System.out.println("No model 664 type found");
+                        super.log("No model 664 type found");
                         break;
                         
                     }else{
@@ -99,7 +104,7 @@ public class ImportFile {
                             model669 = read669(line);
                             
                             if(model669 == null){
-                                System.out.println("No model 669 type found");
+                                super.log("No model 669 type found");
                                 break;
                                 
                             }
