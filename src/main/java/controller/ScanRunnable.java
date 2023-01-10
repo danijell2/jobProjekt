@@ -7,8 +7,7 @@ package controller;
 import java.util.Properties;
 
 /**
- *
- * @author danijell258
+ * class of Runnable type what is needed for ScheduledExecutorService
  */
 public class ScanRunnable extends Commons implements Runnable{
 
@@ -22,7 +21,7 @@ public class ScanRunnable extends Commons implements Runnable{
         importContr.startImport();
         
         // show all records
-        super.log("Gettings all records from database");
+        super.log("Getting all records from database");
         controller.ShowRecords records = new controller.ShowRecords(super.getProperties());
         records.show();
         

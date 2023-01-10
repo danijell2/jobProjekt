@@ -18,6 +18,9 @@ import java.util.logging.Logger;
  * @author danijell258
  */
 
+/**
+* class for importing data from file and inserting it into database
+*/
 public class Import extends Commons{
     
     public Import(Properties properties){
@@ -28,6 +31,10 @@ public class Import extends Commons{
         
         super.log("Starting importing files");
         
+        // go through all files
+        int errorFiles = 0;
+        int successFiles = 0;
+            
         // get list of files
         String files[] = new File(String.valueOf(super.getProperties().get("importFolder"))).list();
         
@@ -36,12 +43,12 @@ public class Import extends Commons{
 
             controller.ImportFile importFile = new controller.ImportFile(super.getProperties());
             boolean error = false;
-            
-            // go through all files
+
             for(int i = 0; i < files.length; i++){
-                
+
                 // check if file is txt
                 String file = files[i];
+                super.log("Importing file "+file);
                 
                 if(file.endsWith(".txt")){
                     
@@ -49,11 +56,13 @@ public class Import extends Commons{
                     String location = String.valueOf(super.getProperties().get("importFolder"))+file;
                     model.TransitionModel transitionModel = null;
                     
+                    // import models from file into transitional model
                     try {
+                        super.log("Starting import of models");
                         transitionModel = importFile.importFile(location);
                         
                     } catch (IOException ex) {
-                        Logger.getLogger(Import.class.getName()).log(Level.SEVERE, null, ex);
+                        super.log("Error while reading the file:"+ex);
                         error = true;
                     }
                     
@@ -86,6 +95,9 @@ public class Import extends Commons{
                                 // move file to archive folder
                                 moveToArchiveFolder(String.valueOf(super.getProperties().get("archiveFolder")), file, location);
                                 
+                                // count successfull file
+                                successFiles++;
+                                
                             }else{
                                 super.log("error trying to insert into table2.\n Skipping this file");
                                 error = true;
@@ -98,12 +110,23 @@ public class Import extends Commons{
                         
                     }else{
                         error = true;
+                        super.log("Error in importing all required models");
                     }
                     
                     // if error during file reading, transfer the file to error folder
                     if(error){
                         moveToErrorFolder(String.valueOf(super.getProperties().get("errorFolder")), file, location);
+                        
+                        // count errorFile file
+                        errorFiles++;
+                        
                     }
+                    
+                }else{
+                    
+                    super.log("File not txt format, skipping file");
+                    // count successfull file
+                    errorFiles++;
                     
                 }
                 
@@ -112,6 +135,8 @@ public class Import extends Commons{
         }else{
             super.log("No files found, please check import folder path");
         }
+        
+        super.log("Imported successfully "+successFiles+" files, while "+errorFiles+" failed");
         
     }
     

@@ -5,10 +5,8 @@
 package model;
 
 /**
- *
- * @author danijell258
+ * class to store model662 data
  */
-
 public class Model662 {
     
     public Model662(){

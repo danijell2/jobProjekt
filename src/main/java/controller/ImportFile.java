@@ -20,8 +20,7 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- *
- * @author danijell258
+ * class for handling of defined models 661, 662, 664, 669 and importing data from file
  */
 public class ImportFile extends Commons{
     
@@ -29,6 +28,7 @@ public class ImportFile extends Commons{
         super.setProperties(properties);
     }
     
+    // reading file
     public model.TransitionModel importFile(String location) throws FileNotFoundException, IOException{
         
         //
@@ -57,11 +57,13 @@ public class ImportFile extends Commons{
         List<model.Model664> model664List = new ArrayList();
         model.Model669 model669 = null;
         
+        // read line by line
         while((line = bufferedReader.readLine()) != null){
             
             // check type661
             if(model661 == null){
                 
+                super.log("importing model 661");
                 model661 = read661(line);
                 
                 // check for error
@@ -75,6 +77,8 @@ public class ImportFile extends Commons{
                 
                 // check for 662
                 if(model662 == null){
+                    
+                    super.log("importing model 662");
                     model662 = read662(line);
                     
                     if(model662 == null){
@@ -88,7 +92,7 @@ public class ImportFile extends Commons{
                     model.Model664 model664 = read664(line);
                     
                     if(model664 != null){
-                        
+                        super.log("importing model 664");
                         model664List.add(model664);
                         
                     }else if(model664List.isEmpty()){
@@ -101,6 +105,7 @@ public class ImportFile extends Commons{
                         // continue with 669 model
                         if(model669 == null){
                             
+                            super.log("importing model 669");
                             model669 = read669(line);
                             
                             if(model669 == null){
@@ -123,6 +128,7 @@ public class ImportFile extends Commons{
         bufferedReader.close();
         
         // check if everything alright
+        super.log("Verifing imported models");
         if(model661 != null && model662 != null && model664List.size() > 0 && model669 != null && model664List.size() == model669.getSize()){
             
             transitionModel = new model.TransitionModel();
@@ -131,6 +137,8 @@ public class ImportFile extends Commons{
             transitionModel.setModel664List(model664List);
             transitionModel.setModel669(model669);
             
+        }else{
+            super.log("imported models incorrect, cannot proceed");
         }
         
         return transitionModel;
@@ -191,6 +199,7 @@ public class ImportFile extends Commons{
         
     }
     
+    // convert line to model662
     private model.Model662 read662(String line){
         
         model.Model662 model662= null;
@@ -245,7 +254,8 @@ id   orderNumber identificationOrderNumber idItem itemType
         return model662;
         
     }
-    
+  
+    // convert line to model664
     public model.Model664 read664(String line){
         
         model.Model664 model = null;
@@ -308,6 +318,7 @@ ME 43 44 alphanumerisch Mengeneinheit (konstant 'ST')
         
     }
     
+    // convert line to model669
     public model.Model669 read669(String line){
         
         model.Model669 model = null;
@@ -356,6 +367,7 @@ Anz.664 4 10 numerisch Anzahl der 664er-Sätze in dieser Datei
         
     }
     
+    // method to verify if a String is a number
     private boolean isNumber(String text){
         
         boolean state = false;
@@ -373,6 +385,7 @@ Anz.664 4 10 numerisch Anzahl der 664er-Sätze in dieser Datei
         
     }
     
+    // method to verify if a String is a Date
     private boolean isDate(String text){
         
         boolean state = false;
@@ -390,6 +403,7 @@ Anz.664 4 10 numerisch Anzahl der 664er-Sätze in dieser Datei
         
     }
     
+    // method to verify if a String is a valid time
     private boolean isTime(String text){
         
         boolean state = false;
@@ -407,6 +421,7 @@ Anz.664 4 10 numerisch Anzahl der 664er-Sätze in dieser Datei
         
     }
     
+    // method to verify if String is empy space ' '
     private boolean isEmptySpace(String text){
         
         boolean state = true;

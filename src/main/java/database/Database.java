@@ -17,8 +17,7 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- *
- * @author danijell258
+ * class for sql database operations
  */
 public class Database extends Config{
     
@@ -26,6 +25,7 @@ public class Database extends Config{
         super.setProperties(properties);
     }
     
+    // insert sql operation
     public model.Table1Model insertTable1(model.Table1Model table1){
 
         boolean duplicate = false;
@@ -99,6 +99,7 @@ public class Database extends Config{
         
     }
     
+    // insert sql operation
     public List<model.Table2Model> insertTable2ModelList(List<model.Table2Model> list){
         
         try(Connection conn = super.conn()){
@@ -128,6 +129,7 @@ public class Database extends Config{
         
     }
     
+    // select sql operation
     public List<model.Table1Model> getTable1List(){
         
         List<model.Table1Model> table1List = null;

@@ -1,0 +1,16 @@
+
+
+Eine Anmerkung habe ich bezüglich der Logs. Es wäre besser, wenn das Programm während des Einlesens einer Datei direkt Meldungen über die gefundenen Felder aus der Datei ausgibt (Klasse ImportFile, Methoden read661/662/664/669()). Dann kann man live verfolgen, was das Programm macht. Eine gesammelte Ausgabe am Ende der Konvertierung ist nicht unbedingt notwendig, allenfalls eine kurze Zusammenfassung (3 Dateien konvertiert, 2 erfolgreich, 1 mit Fehlern oder so ähnlich).
+
+Eine weitere Anmerkung betrifft das Kommentieren des Quelltexts. Mir fehlen noch JavaDoc-kompatible Kommentare in den Klassen, also insbesondere der Zweck von Klassen, Methoden und Variablen. Ein fähiger Java-Programmierer findet schon den Weg durch das Programm, aber ausführliche Kommentare würden sehr helfen.
+
+## log messages
+- show messages to status of reading of configuration file
+- each settings -- new message
+- each method or model message -- much more detail of the current status of the program
+- at the end show the result how much has been imported of files, failed 
+
+## java doc
+- show explanation of each class what is it doing
+- more explanation on each method being used
+- more information on variables being used

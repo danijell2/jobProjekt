@@ -15,11 +15,11 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author danijell258
+ * class for common methods used through the lifetime of the program 
  */
-
 public class Commons {
     
+    // variable to save all user settings
     private Properties properties;
     
     public void setProperties(Properties properties){
@@ -30,6 +30,7 @@ public class Commons {
         return this.properties;
     }
     
+    // print out in terminal message to the user and save the message to user specified log folder
     public void log(String message){
 
         try {

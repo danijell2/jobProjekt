@@ -7,8 +7,7 @@ package model;
 import java.util.List;
 
 /**
- *
- * @author danijell258
+ * class for transition model between imported data and making them ready to be inserted into database
  */
 public class TransitionModel {
     

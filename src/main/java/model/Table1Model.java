@@ -8,10 +8,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- *
- * @author danijell258
+ * model class for table1 in database
  */
-
 public class Table1Model {
     
     /*

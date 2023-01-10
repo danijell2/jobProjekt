@@ -15,10 +15,8 @@ import java.util.logging.Logger;
 import view.Projekt;
 
 /**
- *
- * @author danijell258
- */
-
+* class for importing configuration file where user can specify settings of the program
+*/
 public class ImportConfiguration extends Commons{
     
     public Properties importConfiguration(){
@@ -43,7 +41,8 @@ public class ImportConfiguration extends Commons{
             String line;
             
             while((line = bufferedReader.readLine()) != null){
-                
+
+                 // reading import folder configuration
                 if(line.contains("import_folder=") && (importFolder = line.substring(line.indexOf("import_folder=")+13)).length() > 1){
                     
                     importFolder = importFolder.substring(1);
@@ -52,18 +51,12 @@ public class ImportConfiguration extends Commons{
                     if(!isFolder(importFolder)){
                         importFolder = null;
                     }
-                    
- 
-                }else if(line.contains("archive_folder=") && (archiveFolder= line.substring(line.indexOf("archive_folder=")+14)).length() > 1){
-                    
-                    archiveFolder = archiveFolder.substring(1);
-                    
-                    // check if missing folder
-                    if(!isFolder(archiveFolder)){
-                        archiveFolder = null;
-                    }
-                    
+
+                 // first check error folder to record everything in a file   
                 }else if(line.contains("error_folder=") && (errorFolder = line.substring(line.indexOf("error_folder=")+12)).length() > 1){
+                    
+                    // show status of the program
+                    System.out.println("Reading error folder");
                     
                     errorFolder = errorFolder.substring(1);
                     
@@ -72,23 +65,56 @@ public class ImportConfiguration extends Commons{
                         errorFolder = null;
                     }
                     
+                 // read archive folder configuation
+                }else if(line.contains("archive_folder=") && (archiveFolder= line.substring(line.indexOf("archive_folder=")+14)).length() > 1){
+                    
+                    // show status of the program
+                    System.out.println("Reading archive folder");
+                    
+                    archiveFolder = archiveFolder.substring(1);
+                    
+                    // check if missing folder
+                    if(!isFolder(archiveFolder)){
+                        archiveFolder = null;
+                    }
+                 
+                 // read connection username to database   
                 }else if(line.contains("connection_username=") && (username = line.substring(line.indexOf("connection_username=")+19)).length() > 1){
                     
-                    username = username.substring(1);
+                    // show status of the program
+                    System.out.println("Reading username for database connection");
                     
+                    username = username.substring(1);
+                 
+                 // reading connection password to database   
                 }else if(line.contains("connection_password=") && (password = line.substring(line.indexOf("connection_password=")+19)).length() > 1){
                     
-                    password = password.substring(1);
+                    // show status of the program
+                    System.out.println("Reading password for database connection");
                     
+                    password = password.substring(1);
+                 
+                 // reading connection port to database
                 }else if(line.contains("connection_port=") && (port = line.substring(line.indexOf("connection_port=")+15)).length() > 1){
                     
-                    port = port.substring(1);
+                    // show status of the program
+                    System.out.println("Reading port to database connection");
                     
+                    port = port.substring(1);
+                 
+                 // reading path/url for database connection   
                 }else if(line.contains("connection_path=") && (path = line.substring(line.indexOf("connection_path=")+15)).length() > 1){
                     
-                    path = path.substring(1);
+                    // show status of the program
+                    System.out.println("Reading path to database connection");
                     
+                    path = path.substring(1);
+                 
+                 // 
                 }else if(line.contains("log_folder=") && (logFolder = line.substring(line.indexOf("log_folder=")+10)).length() > 1){
+                    
+                    // show status of the program
+                    System.out.println("Reading log folder");
                     
                     logFolder = logFolder.substring(1);
                     
@@ -97,8 +123,12 @@ public class ImportConfiguration extends Commons{
                     if(file != null && !file.isFile()){
                         logFolder = null;
                     }
-                    
+                 
+                 // reading set time for rescan of import folder
                 }else if(line.contains("time_interval=") && (timeInterval = line.substring(line.indexOf("time_interval=")+14)).length() > 1){
+                    
+                    // show status of the program
+                    System.out.println("Reading set time interval for reindexing of import folder");
                     
                     timeInterval = timeInterval.substring(1);
                     
@@ -115,6 +145,7 @@ public class ImportConfiguration extends Commons{
         }
         
         // validate imported data
+        System.out.println("Verifying imported configuration");
         if(importFolder != null && archiveFolder != null && errorFolder != null && logFolder != null
                 && username != null && password != null && port != null && path != null && timeInterval != null && isNumber(timeInterval)){
 

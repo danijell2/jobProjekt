@@ -8,14 +8,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
- *
- * @author danijell258
+ * class for setting up the database connection with imported parameters
  */
-
 public class Config extends controller.Commons{
 
     @Override
@@ -34,19 +30,23 @@ public class Config extends controller.Commons{
         
         try {
             
+            // load the driver for sql connection -- in this case mysql
             Class.forName("com.mysql.jdbc.Driver").newInstance();
+            
+            // load connection parameters
             Properties settings = (Properties) getProperties().get("connection");
             String username = String.valueOf(settings.get("username"));
             String password = String.valueOf(settings.get("password"));
             String path = String.valueOf(settings.get("path"));
             
+            // create connection
             conn = (Connection) DriverManager.getConnection(path, username, password);
             conn.createStatement();
             
             // Class.forName("org.h2.Driver");
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            super.log(String.valueOf(ex));
+            super.log("Error while trying to establish connection to database: "+String.valueOf(ex));
         }
         
         return conn;
@@ -66,7 +66,7 @@ public class Config extends controller.Commons{
             }
             
         } catch (SQLException ex) {
-            super.log(String.valueOf(ex));
+            super.log("Error while trying to establish connection to database: "+String.valueOf(ex));
         }
         
         return state;

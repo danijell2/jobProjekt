@@ -5,10 +5,8 @@
 package model;
 
 /**
- *
- * @author danijell258
+ * model class for table2 in database
  */
-
 public class Table2Model {
  
     public Table2Model(){

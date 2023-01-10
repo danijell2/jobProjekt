@@ -8,10 +8,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- *
- * @author danijell258
+ * class to store model661 data
  */
-
 public class Model661 {
     /*
     # 661 constraints

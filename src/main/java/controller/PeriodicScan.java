@@ -10,10 +10,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
- * @author danijell258
+ * class for starting rescan/reindex of files in a folder
  */
-
 public class PeriodicScan extends Commons{
     
     public PeriodicScan(Properties properties){
@@ -23,6 +21,7 @@ public class PeriodicScan extends Commons{
     // set scheduled task
     private ScheduledExecutorService scheduler;
     
+    // starting periodic rescan with time defined by user
     public void startListening(Properties properties){
         
         scheduler = Executors.newScheduledThreadPool(2);

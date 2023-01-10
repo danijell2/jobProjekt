@@ -5,10 +5,8 @@
 package model;
 
 /**
- *
- * @author danijell258
+ * class to store model664 data
  */
-
 public class Model664 {
     
     /*

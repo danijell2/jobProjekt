@@ -8,10 +8,8 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- *
- * @author danijell258
+ * class for showing all records from database to user
  */
-
 public class ShowRecords extends Commons{
 
     public ShowRecords(Properties properties){
