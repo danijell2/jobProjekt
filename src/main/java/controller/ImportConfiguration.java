@@ -104,6 +104,11 @@ public class ImportConfiguration extends Commons{
                 if(line.contains("import_folder=") && (importFolder = line.substring(line.indexOf("import_folder=")+13)).length() > 1){
                     
                     /**
+                     * show message on the screen
+                     */
+                    System.out.println("Reading import folder");
+                    
+                    /**
                      * get path to import folder
                      */
                     importFolder = importFolder.substring(1);
