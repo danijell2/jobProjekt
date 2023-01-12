@@ -20,15 +20,26 @@ import java.util.List;
 import java.util.Properties;
 
 /**
+ * @author danijell258
  * class for handling of defined models 661, 662, 664, 669 and importing data from file
  */
 public class ImportFile extends Commons{
     
+    /**
+     * constructor to initialize ImportFile class
+     * @param properties are the main settings defined by the user
+     */
     public ImportFile(Properties properties){
         super.setProperties(properties);
     }
     
-    // reading file
+    /**
+     * method to import specific file from import folder
+     * @param location is the exact path to the file
+     * @return TransitionModel which has been created from data imported from the file
+     * @throws FileNotFoundException exception if file was not found
+     * @throws IOException exception if there is error while reading the file
+     */
     public model.TransitionModel importFile(String location) throws FileNotFoundException, IOException{
         
         //
@@ -44,38 +55,77 @@ public class ImportFile extends Commons{
             
             */
             
-        
+        /**
+         * create new transitionModel variable where the data will be imported from file
+         */
         model.TransitionModel transitionModel = null;
         
+        /**
+         * buffered reader is required to read the file
+         */
         BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(location)));
+        
+        /**
+         * line is a variable in which the buffered reader is storing currently read line from file
+         */
         String line;
+        
+        /**
+         * create model661 variable
+         */
         model.Model661 model661 = null;
-        model.Model662 model662 = null;
-        boolean model661Exist = false;
-        boolean model662Exist = false;
-        int count = 0;
+        
+        /**
+         * create model662 variable
+         */
+        model.Model662 model662 = null;  
+
+        /**
+         * create and initialize list of 664 models
+         */
         List<model.Model664> model664List = new ArrayList();
+        
+        /**
+         * create model669 variable
+         */
         model.Model669 model669 = null;
         
-        // read line by line
+        /**
+         * read the file and check if current read line is not null
+         */
         while((line = bufferedReader.readLine()) != null){
             
-            // check type661
+            /**
+             * check if model661 is not found
+             */
             if(model661 == null){
                 
+                /**
+                 * show message on the screen
+                 */
                 super.log("importing model 661");
+                
+                /**
+                 * import data from the line into model661 variable
+                 */
                 model661 = read661(line);
                 
-                // check for error
+                /**
+                 * check if model661 was not successfully created and if so exit the program
+                 */
                 if(model661 == null){
                     super.log("model 661 type not found");
                     break;     
                 }
               
-             // if type661 exist continue
+             /**
+              * if model 661 was successfully created continue to next import stage
+              */
             }else{
                 
-                // check for 662
+                /**
+                 * check if model662 wasn't already imported and import it
+                 */
                 if(model662 == null){
                     
                     super.log("importing model 662");
@@ -85,29 +135,55 @@ public class ImportFile extends Commons{
                         super.log("model 662 type not found");
                         break;
                     }
-                    
+                 
+                 /**
+                  * if model662 already exist continue to next stage of file import
+                  */
                 }else{
                     
-                    // continue to model 664
+                    /**
+                     * get model664
+                     */
                     model.Model664 model664 = read664(line);
                     
+                    /**
+                     * check if model 664 is not null and add to list
+                     */
                     if(model664 != null){
                         super.log("importing model 664");
                         model664List.add(model664);
-                        
+                     
+                     /**
+                      * if model664 is not valid check if already list contains at list one model664 which is a requirement
+                      */
                     }else if(model664List.isEmpty()){
                         
                         super.log("No model 664 type found");
                         break;
-                        
+                     
+                     /**
+                      * if model664 was imported at least once continue
+                      */   
                     }else{
                         
-                        // continue with 669 model
+                        /**
+                         * check if model669 wasn't already imported
+                         */
                         if(model669 == null){
                             
+                            /**
+                             * show message on the screen
+                             */
                             super.log("importing model 669");
+                            
+                            /**
+                             * import model669
+                             */
                             model669 = read669(line);
                             
+                            /**
+                             * check if model660 wasn't successfully imported and if not log it and exit the program
+                             */
                             if(model669 == null){
                                 super.log("No model 669 type found");
                                 break;
@@ -125,12 +201,24 @@ public class ImportFile extends Commons{
 
         }
         
+        /**
+         * close the buffered reader
+         */
         bufferedReader.close();
         
-        // check if everything alright
+        /**
+         * show message on the screen
+         */
         super.log("Verifing imported models");
+        
+        /**
+         * check if all retrieved variable are valid
+         */
         if(model661 != null && model662 != null && model664List.size() > 0 && model669 != null && model664List.size() == model669.getSize()){
             
+            /**
+             * create transitionModel and save all data
+             */
             transitionModel = new model.TransitionModel();
             transitionModel.setModel661(model661);
             transitionModel.setModel662(model662);
@@ -145,9 +233,14 @@ public class ImportFile extends Commons{
         
     }
     
-    // convert line to type661 model
+    /**
+     * method to read the String and convert it model661
+     * @param line is a String to be converted to model661
+     * @return model661 data type
+     */
     private model.Model661 read661(String line){
         
+        // create new model661
         model.Model661 model = null;
         
         /*
@@ -164,19 +257,49 @@ public class ImportFile extends Commons{
         - empty space, starts at 38 - ends at 128
         */
         
-        // check if 128 characters present
+        /**
+         * check if 128 characters present
+         */
         if(line.length() == 128){
             
-            // seperate to string
+            /**
+             * idType variable which identifies model
+             */
             String idType = line.substring(0, 3);
+            
+            /**
+             * deliveryNumber
+             */
             String deliveryNumber = line.substring(3, 10).replace(" ", ""); // can contain space -- need to remove it to be able to convert to number
-            String customerNumber = line.substring(10, 17).replace(" ", "");
+            
+            /**
+             * customer number
+             */
+            String customerNumber = line.substring(10, 17).replace(" ", ""); // can contain space -- need to remove it to be able to convert to number
+            
+            /**
+             * send number
+             */
             String sendNumber = line.substring(17, 25).replace(" ", "");
+            
+            /**
+             * send date
+             */
             String sendDate = line.substring(25, 33);
+            
+            /**
+             * send time
+             */
             String sendTime = line.substring(33, 37);
+            
+            /**
+             * empty space in a line
+             */
             String emptySpace = line.substring(37);
             
-            // check if valid
+            /**
+             * check if read data is valid
+             */
             if(idType.equals("661") && isNumber(deliveryNumber) && isNumber(customerNumber) && isNumber(sendNumber)
                     && isDate(sendDate) && isTime(sendTime) && isEmptySpace(emptySpace)){
                 
@@ -199,9 +322,16 @@ public class ImportFile extends Commons{
         
     }
     
-    // convert line to model662
+    /**
+     * method to red the line String and convert it to model662
+     * @param line is the String to be read
+     * @return model662 is the data type to be returned
+     */
     private model.Model662 read662(String line){
         
+        /**
+         * create model662
+         */
         model.Model662 model662= null;
         
         /*
@@ -221,19 +351,49 @@ id   orderNumber identificationOrderNumber idItem itemType
 - empty space, starts at 46 - ends at 128
         */
         
-        // check if 128 characters present
+        /**
+         * check if 128 characters present
+         */
         if(line.length() == 128){
             
-            // convert to individual String
+            /**
+             * get id
+             */
             String idType = line.substring(0, 3);
+            
+            /**
+             * get order number
+             */
             String orderNumber = line.substring(3, 7).replace(" ", "");
+            
+            /**
+             * get order number identification
+             */
             String orderNumberIdentification = line.substring(7, 11);
+            
+            /**
+             * get item number
+             */
             String itemNumber = line.substring(11, 21).replace(" ", "");
+            
+            /**
+             * get empty space
+             */
             String emptySpace1 = line.substring(21, 41);
+            
+            /**
+             * get item type
+             */
             String itemType = line.substring(41, 45);
+            
+            /**
+             * get empty space
+             */
             String emptySpace2 = line.substring(45, 128);
             
-            // check if valid
+            /**
+             * check if read data is valid
+             */
             if(idType.equals(idType) && isNumber(orderNumber) && isNumber(itemNumber) && isEmptySpace(emptySpace1) && isEmptySpace(emptySpace2)){
                 
                 // save to model
@@ -255,9 +415,16 @@ id   orderNumber identificationOrderNumber idItem itemType
         
     }
   
-    // convert line to model664
+    /**
+     * method to read String line and convert it to model664
+     * @param line is the String to be read
+     * @return model664 type of data
+     */
     public model.Model664 read664(String line){
         
+        /**
+         * create new model664 data variable
+         */
         model.Model664 model = null;
         
         /*
@@ -289,21 +456,49 @@ ME 43 44 alphanumerisch Mengeneinheit (konstant 'ST')
         
         */
         
-        // check if 128 characters
+        /**
+         * check if 128 characters are present
+         */
         if(line.length() == 128){
             
-            // get individual strings
+            /**
+             * get id type
+             */
             String idType = line.substring(0, 3);
+            
+            /**
+             * get article number
+             */
             String articleNumber = line.substring(3, 35);
+            
+            /**
+             * get article type
+             */
             String articleType = line.substring(35, 39);
+            
+            /**
+             * get size
+             */
             String size = line.substring(39, 42);
+            
+            /**
+             * get times
+             */
             String times = line.substring(42, 44);
+            
+            /**
+             * get empty space
+             */
             String emptySpace = line.substring(44, 128);
             
-            // check if valid
+            /**
+             * check if read data is valid
+             */
             if(idType.equals("664") && isNumber(size) && times.equals("ST") && isEmptySpace(emptySpace)){
                 
-                // convert to model
+                /**
+                 * initialize model664 and save data to it
+                 */
                 model = new model.Model664();
                 model.setItemNo(articleNumber);
                 model.setItemType(articleType);
@@ -318,9 +513,16 @@ ME 43 44 alphanumerisch Mengeneinheit (konstant 'ST')
         
     }
     
-    // convert line to model669
+    /**
+     * method to read String line and convert it to model669
+     * @param line is the String to be read
+     * @return model669 data type
+     */
     public model.Model669 read669(String line){
         
+        /**
+         * create new model669 variable
+         */
         model.Model669 model = null;
         
         /*
@@ -345,17 +547,34 @@ Anz.664 4 10 numerisch Anzahl der 664er-Sätze in dieser Datei
         
         */
         
-        // check if 128 characters
+        /**
+         * check if 128 characters present
+         */
         if(line.length() == 128){
             
-            String modelType = line.substring(0, 3);
+            /**
+             * get id type
+             */
+            String idType = line.substring(0, 3);
+            
+            /**
+             * get size
+             */
             String size = line.substring(3, 10);
+            
+            /**
+             * get empty space
+             */
             String emptySpace = line.substring(10, 128);
             
-            // validate data
-            if(modelType.equals(modelType) && isNumber(size) && isEmptySpace(emptySpace)){
+            /**
+             * check if read data is valid
+             */
+            if(idType.equals(idType) && isNumber(size) && isEmptySpace(emptySpace)){
                 
-                // convert to model
+                /**
+                 * initialize model669 and save data to it
+                 */
                 model = new model.Model669();
                 model.setSize(Integer.valueOf(size));
                 
@@ -367,7 +586,11 @@ Anz.664 4 10 numerisch Anzahl der 664er-Sätze in dieser Datei
         
     }
     
-    // method to verify if a String is a number
+    /**
+     * method to verify if text is a valid number
+     * @param text is the String to be validated
+     * @return 
+     */
     private boolean isNumber(String text){
         
         boolean state = false;
@@ -385,7 +608,11 @@ Anz.664 4 10 numerisch Anzahl der 664er-Sätze in dieser Datei
         
     }
     
-    // method to verify if a String is a Date
+    /**
+     * method to verify that String is a valid Date variable
+     * @param text is the String to be validated
+     * @return boolean is the true/false status of the validation
+     */
     private boolean isDate(String text){
         
         boolean state = false;
@@ -403,7 +630,11 @@ Anz.664 4 10 numerisch Anzahl der 664er-Sätze in dieser Datei
         
     }
     
-    // method to verify if a String is a valid time
+    /**
+     * is the method to check if text is a valid time variable format
+     * @param text is the String to be validated
+     * @return boolean status of the validation
+     */
     private boolean isTime(String text){
         
         boolean state = false;
@@ -421,7 +652,11 @@ Anz.664 4 10 numerisch Anzahl der 664er-Sätze in dieser Datei
         
     }
     
-    // method to verify if String is empy space ' '
+    /**
+     * method verifies if String contains all just empty space ' '
+     * @param text is the String to be validated
+     * @return is of boolean status
+     */
     private boolean isEmptySpace(String text){
         
         boolean state = true;

@@ -9,6 +9,9 @@ package model;
  */
 public class Table2Model {
  
+    /**
+     * Default constructor
+     */
     public Table2Model(){
         
     }
@@ -23,10 +26,29 @@ ITEMTYPE Teileart
     
     */
    
+    /**
+     * Message id from sql table
+     */
     private int messageId;
+    
+    /**
+     * Item position from sql table
+     */
     private int position;
+    
+    /**
+     * Item number from sql table
+     */
     private String itemNo;
+    
+    /**
+     * Quantity from sql table
+     */
     private int quantity;
+    
+    /**
+     * Item type from sql table
+     */
     private String itemType;
     
     public int getMessageId(){

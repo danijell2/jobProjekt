@@ -24,18 +24,56 @@ COMMODITY Teileartgruppe des Bauteils
     
     */
     
+    /**
+     * Default constructor
+     */
     public Table1Model(){
         
     }
     
+    /**
+     * Message id from sql table
+     */
     private int messageId;
+    
+    /**
+     * filename  from sql table
+     */
     private String filename;
+    
+    /**
+     * Order number from sql table
+     */
     private int orderNo;
+    
+    /**
+     * Date and time of the records from sql table
+     */
     private LocalDateTime transmission;
+    
+    /**
+     * Supplier number from sql table
+     */
     private int supplier;
+    
+    /**
+     * Customer number from sql table
+     */
     private int customer;
+    
+    /**
+     * Reference number from sql table
+     */
     private long referenceNo;
+    
+    /**
+     * Commodity type from sql table
+     */
     private String commodity;
+    
+    /**
+     * List of all table2 data for one table1 record
+     */
     private List<model.Table2Model> table2List;
     
     public int getMessageId(){

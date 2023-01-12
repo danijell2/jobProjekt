@@ -31,11 +31,21 @@ Anz.664 4 10 numerisch Anzahl der 664er-Sätze in dieser Datei
     
     */
     
+    /**
+     * Default constructor
+     */
     public Model669(){
         
     }
     
+    /**
+     * Identification number (669, file position from 1 to 3)
+     */
     private int id;
+    
+    /**
+     * Size of all 664 items (file position 4 to 10)
+     */
     private int size;
     
     public int getId(){

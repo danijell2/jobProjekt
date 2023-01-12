@@ -14,23 +14,39 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ *@author daijell258
  * class for common methods used through the lifetime of the program 
  */
 public class Commons {
     
-    // variable to save all user settings
+    /**
+     * variable to save all user settings
+     * @param properties variable where all user defined data is stored
+     */
     private Properties properties;
     
+    /**
+     * setter method for properties variable
+     * @param properties variable where all user defined data is stored
+     */
     public void setProperties(Properties properties){
         this.properties = properties;
     }
     
+    /**
+     * getter method for properties variable
+     * @param  properties variable where all user defined data is stored
+     * @return properties returns the properties variable
+     */
     public Properties getProperties(){
         return this.properties;
     }
-    
-    // print out in terminal message to the user and save the message to user specified log folder
+
+    /**
+     * method for print out in terminal message to the user and save the message to user specified log folder
+     * @param message user defined String that is being logged
+     * @return properties returns the properties variable
+     */
     public void log(String message){
 
         try {
@@ -53,7 +69,9 @@ public class Commons {
         
     }
     
-    // delete everything from last log
+    /**
+     * method which erases all data that existed in the log file and makes the log ready for reuse
+     */
     public void resetLog(){
 
         try {

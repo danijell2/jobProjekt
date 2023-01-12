@@ -1,12 +1,87 @@
-Sat Jan 07 15:07:26 UTC 2023: Configuration imported succesffully
-Sat Jan 07 15:07:26 UTC 2023: Task scheduler is initiating new scan
-Sat Jan 07 15:07:26 UTC 2023: Starting importing files
-Sat Jan 07 15:07:27 UTC 2023: Date and time cannot be before last inserted record which is 2023-05-01 14:00:00.0
-Sat Jan 07 15:07:27 UTC 2023: Error trying to insert data into table1
-Sat Jan 07 15:07:27 UTC 2023: File test.txt moved to error folder
-Sat Jan 07 15:07:27 UTC 2023: Gettings all records from database
-Sat Jan 07 15:07:27 UTC 2023: Showing in descending order from last modified record
-Sat Jan 07 15:07:27 UTC 2023: 
+Thu Jan 12 14:44:51 UTC 2023: Configuration imported succesffully
+Thu Jan 12 14:44:51 UTC 2023: Task scheduler is initiating new scan
+Thu Jan 12 14:44:51 UTC 2023: Starting importing files
+Thu Jan 12 14:44:51 UTC 2023: Importing file test.txt
+Thu Jan 12 14:44:51 UTC 2023: Starting import of models
+Thu Jan 12 14:44:51 UTC 2023: importing model 661
+Thu Jan 12 14:44:51 UTC 2023: importing model 662
+Thu Jan 12 14:44:51 UTC 2023: importing model 664
+Thu Jan 12 14:44:51 UTC 2023: importing model 664
+Thu Jan 12 14:44:51 UTC 2023: importing model 664
+Thu Jan 12 14:44:51 UTC 2023: importing model 664
+Thu Jan 12 14:44:51 UTC 2023: importing model 664
+Thu Jan 12 14:44:51 UTC 2023: importing model 669
+Thu Jan 12 14:44:51 UTC 2023: Verifing imported models
+Thu Jan 12 14:44:52 UTC 2023: Successfully inserted data into table1.
+ Now going to table2
+Thu Jan 12 14:44:52 UTC 2023: Successfully inserted data into table2
+Thu Jan 12 14:44:52 UTC 2023: File test.txt moved to archive folder
+Thu Jan 12 14:44:52 UTC 2023: Imported successfully 1 files, while 0 failed
+Thu Jan 12 14:44:52 UTC 2023: Getting all records from database
+Thu Jan 12 14:44:52 UTC 2023: Showing in descending order from last modified record
+Thu Jan 12 14:44:53 UTC 2023: 
+messageId: 13
+filename: test.txt
+commodity: A0  
+customer: 4711
+orderNo: 7641
+referenceNo: 2301323456
+supplier: 120
+transmission: 2023-07-01T14:00
+there are 5 items:
+position: 1
+itemsNo: A9183738  ZX                    
+itemType: MT  
+quantity: 4
+position: 2
+itemsNo: PK2782938                       
+itemType: MT  
+quantity: 1
+position: 3
+itemsNo: 3B0976456AXZEU                  
+itemType: PT  
+quantity: 2
+position: 4
+itemsNo: 9B5567801  TXA                  
+itemType: PT  
+quantity: 1
+position: 5
+itemsNo: A83748393                       
+itemType: XT  
+quantity: 3
+
+
+messageId: 12
+filename: test.txt
+commodity: A0  
+customer: 4711
+orderNo: 7641
+referenceNo: 2301323456
+supplier: 120
+transmission: 2023-06-01T14:00
+there are 5 items:
+position: 1
+itemsNo: A9183738  ZX                    
+itemType: MT  
+quantity: 4
+position: 2
+itemsNo: PK2782938                       
+itemType: MT  
+quantity: 1
+position: 3
+itemsNo: 3B0976456AXZEU                  
+itemType: PT  
+quantity: 2
+position: 4
+itemsNo: 9B5567801  TXA                  
+itemType: PT  
+quantity: 1
+position: 5
+itemsNo: A83748393                       
+itemType: XT  
+quantity: 3
+
+
 messageId: 5
 filename: 
 commodity: A0  

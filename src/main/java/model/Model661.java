@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
+ * @author danijell258
  * class to store model661 data
  */
 public class Model661 {
@@ -22,15 +23,41 @@ public class Model661 {
 - empty space, starts at 38 - ends at 128 
         */
     
+    /**
+     * Default constructor
+     */
     public Model661(){
         
     }
     
+    /**
+     * Record id (662)
+     */
     private int id;
+    
+    /**
+     * Supplier identification (file position from 4 to 10)
+     */
     private int supplier;
+    
+    /**
+     * Customer number (file position from 11 to 17)
+     */
     private int customer;
+    
+    /**
+     * Send number (file position from 18 to 25)
+     */
     private int sendNumber;
+    
+    /**
+     * Send date (file position from 26 to 33 -- format YYYYMMDD)
+     */
     private LocalDate sendDate;
+    
+    /**
+     * Send time (file position from 34 to 37 -- format HHMM)
+     */
     private LocalTime sendTime;
     
     public int getId(){

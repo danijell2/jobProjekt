@@ -11,13 +11,31 @@ import java.util.List;
  */
 public class TransitionModel {
     
+    /**
+     * Default constructor
+     */
     public TransitionModel(){
         
     }
     
+    /**
+     * Model661
+     */
     private Model661 model661;
+    
+    /**
+     * Model662
+     */
     private Model662 model662;
+    
+    /**
+     * List of model664
+     */
     private List<Model664> model664List;
+    
+    /**
+     * Model669
+     */
     private Model669 model669;
     
     public Model661 getModel661(){

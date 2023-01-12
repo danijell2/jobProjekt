@@ -20,6 +20,9 @@ public class Projekt {
         
     }
     
+    /**
+     * method to start the program
+     */
     private void start(){
         
         // import configuration

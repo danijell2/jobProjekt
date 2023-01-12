@@ -5,6 +5,7 @@
 package model;
 
 /**
+ * @author danijell258
  * class to store model664 data
  */
 public class Model664 {
@@ -36,14 +37,36 @@ ME 43 44 alphanumerisch Mengeneinheit (konstant 'ST')
 (leer) 45 128 alphanumerisch konstant ' ' (Leerzeichen)
     */
     
+    /**
+     * Default constructor
+     */
     public Model664(){
         
     }
     
+    /**
+     * Id number (664 -- file position from 1 ends at 3)
+     */
     private int id;
+    
+    /**
+     * Item number (file position from 4 to 35)
+     */
     private String itemNo;
+    
+    /**
+     * Item type (file position 36 to 39)
+     */
     private String itemType;
+    
+    /**
+     * Quantity amount (file position from 40 to 42)
+     */
     private int quantity;
+    
+    /**
+     * Type of quantity, like per Item (file position from 43 to 44)
+     */
     private String times; // Mengeneinheit, but don't see a need to calculate -- to be used in the program
     
     public int getId(){

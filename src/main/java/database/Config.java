@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
+ * @author danijell258
  * class for setting up the database connection with imported parameters
  */
 public class Config extends controller.Commons{
@@ -24,23 +25,52 @@ public class Config extends controller.Commons{
         super.setProperties(properties);
     }
     
+    /**
+     * method for creating a database connection
+     * @return 
+     */
     public Connection conn(){
         
+        /**
+         * create a new connection variable
+         */
         Connection conn = null;
         
         try {
             
-            // load the driver for sql connection -- in this case mysql
+            /**
+             * load the driver for sql connection -- in this case mysql
+             */
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             
-            // load connection parameters
+            /**
+             * get user defined settings for connection
+             */
             Properties settings = (Properties) getProperties().get("connection");
+            
+            /**
+             * get username for mysql connection
+             */
             String username = String.valueOf(settings.get("username"));
+            
+            /**
+             * get password  for mysql connection
+             */
             String password = String.valueOf(settings.get("password"));
+            
+            /**
+             * get url path for mysql connection
+             */
             String path = String.valueOf(settings.get("path"));
             
-            // create connection
+            /**
+             * establish a connection to the database
+             */
             conn = (Connection) DriverManager.getConnection(path, username, password);
+            
+            /**
+             * create statement with the connection
+             */
             conn.createStatement();
             
             // Class.forName("org.h2.Driver");
@@ -53,6 +83,11 @@ public class Config extends controller.Commons{
         
     }
     
+    /**
+     * method to verify that connection to the database is working
+     * @param properties are the user defined settings for the database connection
+     * @return boolean status of the connection
+     */
     public boolean isWorking(Properties properties){
         
         super.setProperties(properties);
